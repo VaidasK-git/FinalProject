@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="delete_button">- DELETE</string>
+    <string name="add_button">+ ADD</string>
+    <string name="customer_back"><![CDATA[<- BACK]]></string>
+    <string name="customer_next"><![CDATA[NEXT ->]]></string>
+    <string name="create_new_customer_title">create new customer</string>
+    <string name="enter_customer_first_name">Enter customer first name</string>
+    <string name="enter_customer_last_name">Enter customer Last name</string>
+    <string name="enter_customer_phone_number">Enter customer phone number +370</string>
+    <string name="formula_back_button"><![CDATA[<- back]]></string>
+    <string name="formula_save_button">save</string>
+    <string name="create_new_formula">Create new formula</string>
+    <string name="enter_oxidants">Enter oxidants</string>
+    <string name="add_oxidant_weight">Add oxidant weight</string>
+    <string name="enter_colors">Enter colors</string>
+    <string name="add_color_weight">Add color weight</string>
+    <string name="formula_holding_time">Formula holding time</string>
+    <string name="add_formula_holding_time">Add formula holding time</string>
+    <string name="add_formula_price">Add formula price</string>
+</resources>

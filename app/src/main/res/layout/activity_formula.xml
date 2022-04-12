@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutOne"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="200dp"
+        app:layout_anchorGravity="center">
+
+        <TextView
+            android:id="@+id/formulaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/create_new_formula"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/oxidantTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/enter_oxidants"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/formulaTitle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutOxidantOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/oxidantTitle"
+            tools:layout_editor_absoluteY="78dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerOxidantManufacturerOne"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerOxidantProductOne"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerOne"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/oxidantWeightOne"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_oxidant_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerOne"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutOxidantTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutOxidantOne"
+            tools:layout_editor_absoluteY="78dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerOxidantManufacturerTwo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerOxidantProductTwo"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerTwo"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/oxidantWeightTwo"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_oxidant_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerTwo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/colorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/enter_colors"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutOxidantTwo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutColorOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/colorTitle"
+            tools:layout_editor_absoluteX="16dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorManufacturerOne"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorProductOne"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerOne"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/colorWeightOne"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_color_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerOne"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutColorTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutColorOne"
+            tools:layout_editor_absoluteX="16dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorManufacturerTwo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorProductTwo"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerTwo"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/colorWeightTwo"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_color_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerTwo" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutColorThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutColorTwo"
+            tools:layout_editor_absoluteX="16dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorManufacturerThree"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorProductThree"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerThree"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/colorWeightThree"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_color_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerThree" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutColorFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutColorThree"
+            tools:layout_editor_absoluteX="16dp">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorManufacturerFour"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerColorProductFour"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:paddingStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerFour"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/colorWeightFour"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                android:hint="@string/add_color_weight"
+                android:inputType="numberDecimal"
+                android:paddingStart="8dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerFour" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/timeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/formula_holding_time"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutColorFour" />
+
+        <EditText
+            android:id="@+id/editTime"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            android:hint="@string/add_formula_holding_time"
+            android:inputType="number"
+            android:paddingStart="8dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeTitle" />
+
+        <TextView
+            android:id="@+id/priceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/add_formula_price"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTime" />
+
+        <EditText
+            android:id="@+id/editPrice"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/customborder"
+            android:hint="@string/add_formula_price"
+            android:inputType="number"
+            android:paddingStart="8dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/priceTitle" />
+
+        <Button
+            android:id="@+id/formulaBackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/formula_back_button"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPrice"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/formulaSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/formula_save_button"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPrice"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>
