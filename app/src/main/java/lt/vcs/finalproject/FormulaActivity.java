@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 public class FormulaActivity extends AppCompatActivity {
 
@@ -17,6 +19,8 @@ public class FormulaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formula);
+
+//        setupSpinners();
 
         setUpBackButtonClickFormula();
         setUpSaveButtonClickFormula();
@@ -43,6 +47,49 @@ public class FormulaActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void setupSpinners(){
+        setupOxidantSpinners();
+    }
+
+    public void setupOxidantSpinners(){
+        setupSpinnerOxidantManufacturerOne();
+        setupSpinnerOxidantManufacturerTwo();
+        setupSpinnerOxidantProductOne();
+        setupSpinnerOxidantProductTwo();
+    }
+
+    private void setupSpinnerOxidantManufacturerOne() {
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantManufacturerOne);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.oxidants_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    private void setupSpinnerOxidantManufacturerTwo() {
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantManufacturerOne);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.oxidants_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    private void setupSpinnerOxidantProductOne() {
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantProductOne);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.oxidants_product_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    private void setupSpinnerOxidantProductTwo() {
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantProductOne);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.oxidants_product_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
 }

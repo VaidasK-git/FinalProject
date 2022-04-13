@@ -18,4 +18,20 @@
     <string name="formula_holding_time">Formula holding time</string>
     <string name="add_formula_holding_time">Add formula holding time</string>
     <string name="add_formula_price">Add formula price</string>
+
+
+    <string-array name="oxidants_array">
+        <item>Inoa Oxidant</item>
+        <item>Other Oxidant</item>
+        <item> </item>
+    </string-array>
+
+    <string-array name="oxidants_product_array">
+        <item>3%</item>
+        <item>6%</item>
+        <item>9%</item>
+        <item> </item>
+    </string-array>
+
+
 </resources>

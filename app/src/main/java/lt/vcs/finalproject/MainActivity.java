@@ -1,13 +1,11 @@
 package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,14 +16,14 @@ import java.util.List;
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.CustomerDatabase;
-import lt.vcs.finalproject.repository.ManuallyCreatedCustomers;
+import lt.vcs.finalproject.repository.Product;
 
 public class MainActivity extends AppCompatActivity {
 
     List<Customer> customersList;
+    List<Product> productList;
     ArrayAdapter<Customer> arrayAdapter;
     ListView elementListView;
-    ManuallyCreatedCustomers manuallyCreatedCustomers;
     Button addButton;
     Intent intent;
 
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//       customersList = ManuallyCreatedCustomers.getCustomers();
 
         CustomerDatabase customerDatabase =
                 Room.databaseBuilder(
@@ -45,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
                         .fallbackToDestructiveMigration()
                         .build();
 
+
         CustomerDao customerDao = customerDatabase.customerDao();
-//        customerDao.insertCustomers(customersList);
-//
+
         customersList = new ArrayList();
 
         customersList = customerDao.getAll();
