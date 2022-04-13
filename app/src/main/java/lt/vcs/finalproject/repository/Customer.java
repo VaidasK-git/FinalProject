@@ -29,7 +29,6 @@ public class Customer {
         this.customerPhoneNumber = customerPhoneNumber;
     }
 
-
     public int getCustomerId() {
         return customerId;
     }
@@ -66,6 +65,5 @@ public class Customer {
     public String toString() {
         return customerId + " " +customerFirstName + " " + customerLastName;
     }
-
 
 }

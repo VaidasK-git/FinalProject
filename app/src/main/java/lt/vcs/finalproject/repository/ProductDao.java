@@ -13,24 +13,24 @@ import lt.vcs.finalproject.Constants;
 @Dao
 public interface ProductDao {
 
-//    @Query("SELECT * FROM " + Constants.ENTITY_PRODUCTS_TABLE)
-//    List<Product> getAll();
-//
-//    @Query("SELECT * FROM " + Constants.ENTITY_PRODUCTS_TABLE + " WHERE productManufacturer =:productManufacturer")
-//    Customer getItem(String productManufacturer);
+    @Query("SELECT * FROM " + Constants.ENTITY_PRODUCTS_TABLE)
+    List<Product> getAll();
+
+    @Query("SELECT * FROM " + Constants.ENTITY_PRODUCTS_TABLE + " WHERE productId =:productId")
+    Product getItem(int productId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProducts(List<Product> customers);
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    void insertProduct(Product product);
-//
-//    @Delete
-//    void deleteProducts(List<Product> products);
-//
-//    @Delete
-//    void deleteProduct(Product product);
-//
-//    @Query("DELETE FROM " + Constants.ENTITY_PRODUCTS_TABLE+ " WHERE productManufacturer =:productManufacturer")
-//    void deleteItem(String productManufacturer);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertProduct(Product product);
+
+    @Delete
+    void deleteProducts(List<Product> products);
+
+    @Delete
+    void deleteProduct(Product product);
+
+    @Query("DELETE FROM " + Constants.ENTITY_PRODUCTS_TABLE+ " WHERE productId =:productId")
+    void deleteItem(int productId);
 }

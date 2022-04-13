@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.text.BreakIterator;
-
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.CustomerDatabase;
@@ -57,9 +55,9 @@ public class CustomerActivity extends AppCompatActivity {
     private void setUpNextButtonClickCustomer() {
         backButtonCustomer = findViewById(R.id.customerNextButton);
 
-        final EditText editTextCustomerFirstName = (EditText)findViewById(R.id.customerFirstName);
-        final EditText editTextCustomerLastName = (EditText)findViewById(R.id.customerLastName);
-        final EditText editTextCustomerPhoneNumber = (EditText)findViewById(R.id.customerPhoneNumber);
+        final EditText editTextCustomerFirstName = findViewById(R.id.customerFirstName);
+        final EditText editTextCustomerLastName = findViewById(R.id.customerLastName);
+        final EditText editTextCustomerPhoneNumber = findViewById(R.id.customerPhoneNumber);
 
         backButtonCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,9 +68,10 @@ public class CustomerActivity extends AppCompatActivity {
 
                 Customer customer = new Customer(customerFirstName, customerLastName, customerPhoneNumber);
 
-//                customerDao.insertCustomer(customer);
+                customerDao.insertCustomer(customer);
 
                 intent = new Intent(CustomerActivity.this, FormulaActivity.class);
+
                 startActivity(intent);
             }
         });

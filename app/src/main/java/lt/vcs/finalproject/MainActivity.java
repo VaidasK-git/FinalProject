@@ -17,6 +17,8 @@ import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.CustomerDatabase;
 import lt.vcs.finalproject.repository.Product;
+import lt.vcs.finalproject.repository.ProductDao;
+import lt.vcs.finalproject.repository.ProductDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         CustomerDatabase customerDatabase =
                 Room.databaseBuilder(
