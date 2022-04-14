@@ -28,7 +28,6 @@ public class CustomerActivity extends AppCompatActivity {
 
         connectToDatabase();
 
-
         setUpBackButtonClickCustomer();
         setUpNextButtonClickCustomer();
 
@@ -76,7 +75,7 @@ public class CustomerActivity extends AppCompatActivity {
 
                 Customer customer = new Customer(customerFirstName, customerLastName, customerPhoneNumber);
 
-//                customerDao.insertCustomer(customer);
+                customerDao.insertCustomer(customer);
 
                 intent = new Intent(CustomerActivity.this, FormulaActivity.class);
 

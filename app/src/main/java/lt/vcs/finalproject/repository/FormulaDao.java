@@ -1,5 +1,7 @@
 package lt.vcs.finalproject.repository;
 
+import android.content.Intent;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,6 +20,9 @@ public interface FormulaDao {
 
     @Query("SELECT * FROM " + Constants.ENTITY_FORMULAS_TABLE + " WHERE formulaId =:formulaId")
     Formula getItem(int formulaId);
+
+    @Query("SELECT MAX(formulaId) FROM " + Constants.ENTITY_FORMULAS_TABLE)
+    Integer getMaxFormulaId();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertFormulas(List<Formula> formulas);

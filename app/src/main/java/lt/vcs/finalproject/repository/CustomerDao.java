@@ -1,5 +1,6 @@
 package lt.vcs.finalproject.repository;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,6 +19,9 @@ public interface CustomerDao {
 
     @Query("SELECT * FROM " + Constants.ENTITY_CUSTOMERS_TABLE + " WHERE customerId =:customerId")
     Customer getItem(int customerId);
+
+    @Query("SELECT MAX(customerId) FROM " + Constants.ENTITY_CUSTOMERS_TABLE)
+    Integer getMaxCustomerId();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCustomers(List<Customer> customers);

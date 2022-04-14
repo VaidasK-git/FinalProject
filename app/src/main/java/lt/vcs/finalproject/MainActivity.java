@@ -1,11 +1,14 @@
 package lt.vcs.finalproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -27,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
     ListView elementListView;
     CustomerDao customerDao;
     FormulaDao formulaDao;
+    Customer clickedCustomer;
     Button addButton;
     Intent intent;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         customersList = customerDao.getAll();
 
         setUpListView();
+        setUpListViewItemClick();
+        setUpListViewItemLongClick();
 
         setUpAddButtonClick();
 
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         customerDao = mainDatabase.customerDao();
         formulaDao = mainDatabase.formulaDao();
+
     }
 
     private void setUpListView() {
@@ -69,8 +77,46 @@ public class MainActivity extends AppCompatActivity {
         elementListView.setAdapter(arrayAdapter);
     }
 
+    private void setUpListViewItemClick() {
+        elementListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                intent = new Intent(MainActivity.this, OrderActivity.class);
+                clickedCustomer = customersList.get(position);
+                intent.putExtra("Message", clickedCustomer.getCustomerId());
+                startActivity(intent);
+            }
+        });
+    }
 
+    private void setUpDialogBuilder(int position) {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you would like to delete customer?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                customersList.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("No", null);
+        builder.show();
+    }
 
+    private void setUpListViewItemLongClick() {
+        elementListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(
+                    AdapterView<?> adapterView,
+                    View view,
+                    int position,
+                    long id) {
+                customerDao.deleteItem(position);
+                setUpDialogBuilder(position);
+                return true;
+            }
+        });
+    }
 
     private void setUpAddButtonClick() {
         addButton = findViewById(R.id.addButton);
@@ -83,6 +129,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
 }

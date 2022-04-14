@@ -1,6 +1,7 @@
 package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
 import android.content.Intent;
@@ -13,11 +14,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import lt.vcs.finalproject.repository.Color;
-import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.Formula;
 import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.Order;
+import lt.vcs.finalproject.repository.OrderDao;
 import lt.vcs.finalproject.repository.Oxidant;
 
 public class FormulaActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class FormulaActivity extends AppCompatActivity {
     Intent intent;
     CustomerDao customerDao;
     FormulaDao formulaDao;
+    OrderDao orderDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,10 @@ public class FormulaActivity extends AppCompatActivity {
                         .fallbackToDestructiveMigration()
                         .build();
 
-        customerDao = mainDatabase.customerDao();
+        orderDao = mainDatabase.orderDao();
         formulaDao = mainDatabase.formulaDao();
+        customerDao = mainDatabase.customerDao();
+
     }
 
     private void setUpSpinners() {
@@ -204,7 +209,8 @@ public class FormulaActivity extends AppCompatActivity {
                 }
                 Color colorOne = new Color(colorManufacturerOne, colorProductOne, colorWeightOne);
 
-                String colorManufacturerTwo = spinnerColorManufacturerTwo.getSelectedItem().toString();;
+                String colorManufacturerTwo = spinnerColorManufacturerTwo.getSelectedItem().toString();
+                ;
                 String colorProductTwo = spinnerColorProductTwo.getSelectedItem().toString();
                 int colorWeightTwo;
                 if (editTextColorWeightTwo.getText().toString().equals("")) {
@@ -214,7 +220,8 @@ public class FormulaActivity extends AppCompatActivity {
                 }
                 Color colorTwo = new Color(colorManufacturerTwo, colorProductTwo, colorWeightTwo);
 
-                String colorManufacturerThree = spinnerColorManufacturerThree.getSelectedItem().toString();;
+                String colorManufacturerThree = spinnerColorManufacturerThree.getSelectedItem().toString();
+                ;
                 String colorProductThree = spinnerColorProductThree.getSelectedItem().toString();
                 int colorWeightThree;
                 if (editTextColorWeightThree.getText().toString().equals("")) {
@@ -224,7 +231,8 @@ public class FormulaActivity extends AppCompatActivity {
                 }
                 Color colorThree = new Color(colorManufacturerThree, colorProductThree, colorWeightThree);
 
-                String colorManufacturerFour = spinnerColorManufacturerFour.getSelectedItem().toString();;
+                String colorManufacturerFour = spinnerColorManufacturerFour.getSelectedItem().toString();
+                ;
                 String colorProductFour = spinnerColorProductFour.getSelectedItem().toString();
                 int colorWeightFour;
                 if (editTextColorWeightFour.getText().toString().equals("")) {
@@ -234,8 +242,19 @@ public class FormulaActivity extends AppCompatActivity {
                 }
                 Color colorFour = new Color(colorManufacturerFour, colorProductFour, colorWeightFour);
 
-                int formulaTime= Integer.parseInt(editTextFormulaTime.getText().toString());
-                int formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
+                int formulaTime;
+                if (editTextFormulaTime.getText().toString().equals("")) {
+                    formulaTime = 0;
+                } else {
+                    formulaTime = Integer.parseInt(editTextFormulaTime.getText().toString());
+                }
+
+                int formulaPrice;
+                if (editTextFormulaPrice.getText().toString().equals("")) {
+                    formulaPrice = 0;
+                } else {
+                    formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
+                }
                 Formula formula = new Formula(formulaTime, formulaPrice);
                 if (!oxidantManufacturerOne.equals("")) {
                     formula.add(oxidantOne);
@@ -256,7 +275,14 @@ public class FormulaActivity extends AppCompatActivity {
                     formula.add(colorFour);
                 }
 
-//                formulaDao.insertFormula(formula);
+                formulaDao.insertFormula(formula);
+
+                int customerId = customerDao.getMaxCustomerId();
+                int formulaId = formulaDao.getMaxFormulaId();
+                Order order = new Order(customerId, formulaId);
+                orderDao.insertOrder(order);
+
+//                orderDao.deleteItem(3);
 
                 intent = new Intent(FormulaActivity.this, MainActivity.class);
                 startActivity(intent);

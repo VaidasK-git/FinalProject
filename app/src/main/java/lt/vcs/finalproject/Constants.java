@@ -5,5 +5,5 @@ public class Constants {
     public final static String ENTITY_PRODUCTS_TABLE = "products";
     public final static String ENTITY_FORMULAS_TABLE = "formulas";
     public final static String ENTITY_ORDERS_TABLE = "orders";
-    public final static int MAIN_DATABASE_VERSION = 3;
+    public final static int MAIN_DATABASE_VERSION = 4;
 }
