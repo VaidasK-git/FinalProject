@@ -47,6 +47,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         customerDao = mainDatabase.customerDao();
         formulaDao = mainDatabase.formulaDao();
+
     }
 
     private void setUpBackButtonClickCustomer() {

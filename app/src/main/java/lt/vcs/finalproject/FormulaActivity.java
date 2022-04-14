@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import lt.vcs.finalproject.repository.Color;
@@ -143,19 +144,117 @@ public class FormulaActivity extends AppCompatActivity {
     private void setUpSaveButtonClickFormula() {
         saveButtonFormula = findViewById(R.id.formulaSaveButton);
 
+        final Spinner spinnerOxidantManufacturerOne = findViewById(R.id.spinnerOxidantManufacturerOne);
+        final Spinner spinnerOxidantProductOne = findViewById(R.id.spinnerOxidantProductOne);
+        final EditText editTextOxidantWeightOne = findViewById(R.id.oxidantWeightOne);
+
+        final Spinner spinnerOxidantManufacturerTwo = findViewById(R.id.spinnerOxidantManufacturerTwo);
+        final Spinner spinnerOxidantProductTwo = findViewById(R.id.spinnerOxidantProductTwo);
+        final EditText editTextOxidantWeightTwo = findViewById(R.id.oxidantWeightTwo);
+
+        final Spinner spinnerColorManufacturerOne = findViewById(R.id.spinnerColorManufacturerOne);
+        final Spinner spinnerColorProductOne = findViewById(R.id.spinnerColorProductOne);
+        final EditText editTextColorWeightOne = findViewById(R.id.colorWeightOne);
+
+        final Spinner spinnerColorManufacturerTwo = findViewById(R.id.spinnerColorManufacturerTwo);
+        final Spinner spinnerColorProductTwo = findViewById(R.id.spinnerColorProductTwo);
+        final EditText editTextColorWeightTwo = findViewById(R.id.colorWeightTwo);
+
+        final Spinner spinnerColorManufacturerThree = findViewById(R.id.spinnerColorManufacturerThree);
+        final Spinner spinnerColorProductThree = findViewById(R.id.spinnerColorProductThree);
+        final EditText editTextColorWeightThree = findViewById(R.id.colorWeightThree);
+
+        final Spinner spinnerColorManufacturerFour = findViewById(R.id.spinnerColorManufacturerFour);
+        final Spinner spinnerColorProductFour = findViewById(R.id.spinnerColorProductFour);
+        final EditText editTextColorWeightFour = findViewById(R.id.colorWeightFour);
+
+        final EditText editTextFormulaTime = findViewById(R.id.formulaTime);
+        final EditText editTextFormulaPrice = findViewById(R.id.formulaPrice);
 
         saveButtonFormula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Oxidant oxidantOne = new Oxidant("INOA Oxidant", "3%", 6);
-                Oxidant oxidantTwo = new Oxidant("INOA Oxidant", "6%", 12);
-                Color colorOne = new Color("INOA", "6", 15);
-                Color colorTwo = new Color("INOA", "6.5", 28);
-                Formula formula = new Formula(45, 85);
-                formula.add(oxidantOne);
-                formula.add(oxidantTwo);
-                formula.add(colorOne);
-                formula.add(colorTwo);
+                String oxidantManufacturerOne = spinnerOxidantManufacturerOne.getSelectedItem().toString();
+                String oxidantProductOne = spinnerOxidantProductOne.getSelectedItem().toString();
+                int oxidantWeightOne;
+                if (editTextOxidantWeightOne.getText().toString().equals("")) {
+                    oxidantWeightOne = 0;
+                } else {
+                    oxidantWeightOne = Integer.parseInt(editTextOxidantWeightOne.getText().toString());
+                }
+                Oxidant oxidantOne = new Oxidant(oxidantManufacturerOne, oxidantProductOne, oxidantWeightOne);
+
+                String oxidantManufacturerTwo = spinnerOxidantManufacturerTwo.getSelectedItem().toString();
+                String oxidantProductTwo = spinnerOxidantProductTwo.getSelectedItem().toString();
+                int oxidantWeightTwo;
+                if (editTextOxidantWeightTwo.getText().toString().equals("")) {
+                    oxidantWeightTwo = 0;
+                } else {
+                    oxidantWeightTwo = Integer.parseInt(editTextOxidantWeightTwo.getText().toString());
+                }
+                Oxidant oxidantTwo = new Oxidant(oxidantManufacturerTwo, oxidantProductTwo, oxidantWeightTwo);
+
+                String colorManufacturerOne = spinnerColorManufacturerOne.getSelectedItem().toString();
+                String colorProductOne = spinnerColorProductOne.getSelectedItem().toString();
+                int colorWeightOne;
+                if (editTextColorWeightOne.getText().toString().equals("")) {
+                    colorWeightOne = 0;
+                } else {
+                    colorWeightOne = Integer.parseInt(editTextColorWeightOne.getText().toString());
+                }
+                Color colorOne = new Color(colorManufacturerOne, colorProductOne, colorWeightOne);
+
+                String colorManufacturerTwo = spinnerColorManufacturerTwo.getSelectedItem().toString();;
+                String colorProductTwo = spinnerColorProductTwo.getSelectedItem().toString();
+                int colorWeightTwo;
+                if (editTextColorWeightTwo.getText().toString().equals("")) {
+                    colorWeightTwo = 0;
+                } else {
+                    colorWeightTwo = Integer.parseInt(editTextColorWeightTwo.getText().toString());
+                }
+                Color colorTwo = new Color(colorManufacturerTwo, colorProductTwo, colorWeightTwo);
+
+                String colorManufacturerThree = spinnerColorManufacturerThree.getSelectedItem().toString();;
+                String colorProductThree = spinnerColorProductThree.getSelectedItem().toString();
+                int colorWeightThree;
+                if (editTextColorWeightThree.getText().toString().equals("")) {
+                    colorWeightThree = 0;
+                } else {
+                    colorWeightThree = Integer.parseInt(editTextColorWeightThree.getText().toString());
+                }
+                Color colorThree = new Color(colorManufacturerThree, colorProductThree, colorWeightThree);
+
+                String colorManufacturerFour = spinnerColorManufacturerFour.getSelectedItem().toString();;
+                String colorProductFour = spinnerColorProductFour.getSelectedItem().toString();
+                int colorWeightFour;
+                if (editTextColorWeightFour.getText().toString().equals("")) {
+                    colorWeightFour = 0;
+                } else {
+                    colorWeightFour = Integer.parseInt(editTextColorWeightFour.getText().toString());
+                }
+                Color colorFour = new Color(colorManufacturerFour, colorProductFour, colorWeightFour);
+
+                int formulaTime= Integer.parseInt(editTextFormulaTime.getText().toString());
+                int formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
+                Formula formula = new Formula(formulaTime, formulaPrice);
+                if (!oxidantManufacturerOne.equals("")) {
+                    formula.add(oxidantOne);
+                }
+                if (!oxidantManufacturerTwo.equals("")) {
+                    formula.add(oxidantTwo);
+                }
+                if (!colorManufacturerOne.equals("")) {
+                    formula.add(colorOne);
+                }
+                if (!colorManufacturerTwo.equals("")) {
+                    formula.add(colorTwo);
+                }
+                if (!colorManufacturerThree.equals("")) {
+                    formula.add(colorThree);
+                }
+                if (!colorManufacturerFour.equals("")) {
+                    formula.add(colorFour);
+                }
 
 //                formulaDao.insertFormula(formula);
 

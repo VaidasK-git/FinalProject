@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         elementListView.setAdapter(arrayAdapter);
     }
 
+
+
+
     private void setUpAddButtonClick() {
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {

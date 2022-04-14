@@ -363,7 +363,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayoutColorFour" />
 
         <EditText
-            android:id="@+id/editTime"
+            android:id="@+id/formulaTime"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
@@ -388,10 +388,10 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTime" />
+            app:layout_constraintTop_toBottomOf="@+id/formulaTime" />
 
         <EditText
-            android:id="@+id/editPrice"
+            android:id="@+id/formulaPrice"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
@@ -417,7 +417,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPrice"
+            app:layout_constraintTop_toBottomOf="@+id/formulaPrice"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

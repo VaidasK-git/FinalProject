@@ -9,10 +9,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Converters {
     @TypeConverter
-    public String OxidantFromValuesToList(ArrayList<Oxidant> value) {
+    public String oxidantFromValuesToList(ArrayList<Oxidant> value) {
         if (value== null) {
             return (null);
         }
@@ -33,7 +34,7 @@ public class Converters {
     }
 
     @TypeConverter
-    public String ColorFromValuesToList(ArrayList<Color> value) {
+    public String colorFromValuesToList(ArrayList<Color> value) {
         if (value== null) {
             return (null);
         }
@@ -43,7 +44,7 @@ public class Converters {
     }
 
     @TypeConverter
-    public ArrayList<Color> ColorToOptionValuesList(String value) {
+    public ArrayList<Color> colorToOptionValuesList(String value) {
         if (value== null) {
             return (null);
         }
