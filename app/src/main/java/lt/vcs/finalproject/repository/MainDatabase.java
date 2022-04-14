@@ -2,15 +2,18 @@ package lt.vcs.finalproject.repository;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import lt.vcs.finalproject.Constants;
 
 @Database(
-        entities = {Customer.class},
+        entities = {Customer.class, Formula.class, Product.class},
         version = Constants.MAIN_DATABASE_VERSION,
         exportSchema = false)
-
-public abstract class CustomerDatabase extends RoomDatabase {
+@TypeConverters({Converters.class})
+public abstract class MainDatabase extends RoomDatabase {
     public abstract CustomerDao customerDao();
+    public abstract FormulaDao formulaDao();
+    public abstract ProductDao productDao();
 }
 

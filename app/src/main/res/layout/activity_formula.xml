@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
-                android:entries="@array/oxidants_array"
+                android:entries="@array/oxidants_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -69,7 +69,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:paddingStart="8dp"
-                android:entries="@array/oxidants_product_array"
+                android:entries="@array/oxidants_products_array"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerOne"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
-                android:entries="@array/oxidants_array"
+                android:entries="@array/oxidants_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -120,7 +120,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:paddingStart="8dp"
-                android:entries="@array/oxidants_product_array"
+                android:entries="@array/oxidants_products_array"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerTwo"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -170,6 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
+                android:entries="@array/color_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -219,6 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
+                android:entries="@array/color_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -267,6 +269,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
+                android:entries="@array/color_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -314,6 +317,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:paddingStart="8dp"
+                android:entries="@array/color_manufacturer_array"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -401,23 +405,10 @@
             app:layout_constraintTop_toBottomOf="@+id/priceTitle" />
 
         <Button
-            android:id="@+id/formulaBackButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/formulaSaveButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/formula_back_button"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPrice"
-            tools:ignore="MissingConstraints" />
-
-        <Button
-            android:id="@+id/formulaSaveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
@@ -425,6 +416,7 @@
             android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editPrice"
             tools:ignore="MissingConstraints" />
 

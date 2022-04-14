@@ -11,35 +11,42 @@ import android.widget.EditText;
 
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.CustomerDatabase;
+import lt.vcs.finalproject.repository.FormulaDao;
+import lt.vcs.finalproject.repository.MainDatabase;
 
 public class CustomerActivity extends AppCompatActivity {
 
     Button backButtonCustomer;
     Intent intent;
     CustomerDao customerDao;
+    FormulaDao formulaDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
 
+        connectToDatabase();
 
-        CustomerDatabase customerDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        CustomerDatabase.class,
-                        "customers.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-        customerDao = customerDatabase.customerDao();
 
         setUpBackButtonClickCustomer();
         setUpNextButtonClickCustomer();
 
         intent = getIntent();
+    }
+
+    private void connectToDatabase() {
+        MainDatabase mainDatabase =
+                Room.databaseBuilder(
+                        getApplicationContext(),
+                        MainDatabase.class,
+                        "main.db"
+                ).allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build();
+
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
     }
 
     private void setUpBackButtonClickCustomer() {
@@ -68,7 +75,7 @@ public class CustomerActivity extends AppCompatActivity {
 
                 Customer customer = new Customer(customerFirstName, customerLastName, customerPhoneNumber);
 
-                customerDao.insertCustomer(customer);
+//                customerDao.insertCustomer(customer);
 
                 intent = new Intent(CustomerActivity.this, FormulaActivity.class);
 

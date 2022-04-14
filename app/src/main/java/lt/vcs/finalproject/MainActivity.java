@@ -15,17 +15,18 @@ import java.util.List;
 
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.CustomerDatabase;
+import lt.vcs.finalproject.repository.FormulaDao;
+import lt.vcs.finalproject.repository.MainDatabase;
 import lt.vcs.finalproject.repository.Product;
 import lt.vcs.finalproject.repository.ProductDao;
-import lt.vcs.finalproject.repository.ProductDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
     List<Customer> customersList;
-    List<Product> productList;
     ArrayAdapter<Customer> arrayAdapter;
     ListView elementListView;
+    CustomerDao customerDao;
+    FormulaDao formulaDao;
     Button addButton;
     Intent intent;
 
@@ -34,17 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CustomerDatabase customerDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        CustomerDatabase.class,
-                        "customers.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-
-        CustomerDao customerDao = customerDatabase.customerDao();
+        connectToDatabase();
 
         customersList = new ArrayList();
 
@@ -54,8 +45,23 @@ public class MainActivity extends AppCompatActivity {
 
         setUpAddButtonClick();
 
+        intent = getIntent();
+
     }
 
+    private void connectToDatabase() {
+        MainDatabase mainDatabase =
+                Room.databaseBuilder(
+                        getApplicationContext(),
+                        MainDatabase.class,
+                        "main.db"
+                ).allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build();
+
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
+    }
 
     private void setUpListView() {
         elementListView = findViewById(R.id.customerListView);

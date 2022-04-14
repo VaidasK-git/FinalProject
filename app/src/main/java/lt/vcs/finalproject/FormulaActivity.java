@@ -6,118 +6,166 @@ import androidx.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
+import lt.vcs.finalproject.repository.Color;
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.CustomerDatabase;
+import lt.vcs.finalproject.repository.Formula;
+import lt.vcs.finalproject.repository.FormulaDao;
+import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.Oxidant;
 
 public class FormulaActivity extends AppCompatActivity {
 
-    Button backButtonFormula;
+    Button saveButtonFormula;
     Intent intent;
     CustomerDao customerDao;
+    FormulaDao formulaDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formula);
 
-        CustomerDatabase customerDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        CustomerDatabase.class,
-                        "customers.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
+        connectToDatabase();
 
-        customerDao = customerDatabase.customerDao();
+        setUpSpinners();
 
-//        setupSpinners();
-
-        setUpBackButtonClickFormula();
         setUpSaveButtonClickFormula();
 
         intent = getIntent();
 
+        onBackPressed();
     }
 
-    private void setUpBackButtonClickFormula() {
-        backButtonFormula = findViewById(R.id.formulaBackButton);
-        backButtonFormula.setOnClickListener(new View.OnClickListener() {
+    private void connectToDatabase() {
+        MainDatabase mainDatabase =
+                Room.databaseBuilder(
+                        getApplicationContext(),
+                        MainDatabase.class,
+                        "main.db"
+                ).allowMainThreadQueries()
+                        .fallbackToDestructiveMigration()
+                        .build();
+
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
+    }
+
+    private void setUpSpinners() {
+        setUpColorSpinner(R.id.spinnerColorManufacturerOne, R.id.spinnerColorProductOne);
+        setUpColorSpinner(R.id.spinnerColorManufacturerTwo, R.id.spinnerColorProductTwo);
+        setUpColorSpinner(R.id.spinnerColorManufacturerThree, R.id.spinnerColorProductThree);
+        setUpColorSpinner(R.id.spinnerColorManufacturerFour, R.id.spinnerColorProductFour);
+    }
+
+    private void setUpColorSpinner(int manufacturerId, int productId) {
+
+        Spinner manufacturerSpinner = findViewById(manufacturerId);
+        Spinner productSpinner = findViewById(productId);
+
+        manufacturerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedClass = parent.getItemAtPosition(position).toString();
+                switch (selectedClass) {
+                    case "":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_empty_products_array)));
+                        break;
+
+                    case "INOA":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_products_array)));
+                        break;
+
+                    case "INOA Bronzing":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_bronzing_products_array)));
+                        break;
+
+                    case "INOA Carmilane":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_carmilane_products_array)));
+                        break;
+
+                    case "INOA Fundamental":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_fundamentals_products_array)));
+                        break;
+
+                    case "INOA Glow":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_glow_products_array)));
+                        break;
+
+                    case "INOA High Resist":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_hresist_products_array)));
+                        break;
+
+                    case "INOA Marron Resist":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_mresist_products_array)));
+                        break;
+
+                    case "INOA Rubilane":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_rubilane_products_array)));
+                        break;
+                    case "INOA Supreme":
+                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                getResources().getStringArray(R.array.color_inoa_supreme_products_array)));
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
     private void setUpSaveButtonClickFormula() {
-        backButtonFormula = findViewById(R.id.formulaSaveButton);
+        saveButtonFormula = findViewById(R.id.formulaSaveButton);
 
-//        final EditText editTextCustomerFirstName = (EditText)findViewById(R.id.customerFirstName);
-//        final EditText editTextCustomerLastName = (EditText)findViewById(R.id.customerLastName);
-//        final EditText editTextCustomerPhoneNumber = (EditText)findViewById(R.id.customerPhoneNumber);
 
-        backButtonFormula.setOnClickListener(new View.OnClickListener() {
+        saveButtonFormula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String customerFirstName = editTextCustomerFirstName.getText().toString();
-//                String customerLastName = editTextCustomerLastName.getText().toString();
-//                String customerPhoneNumber = editTextCustomerPhoneNumber.getText().toString();
-//
-//                Customer customer = new Customer(customerFirstName, customerLastName, customerPhoneNumber);
-//
-//                customerDao.insertCustomer(customer);
+                Oxidant oxidantOne = new Oxidant("INOA Oxidant", "3%", 6);
+                Oxidant oxidantTwo = new Oxidant("INOA Oxidant", "6%", 12);
+                Color colorOne = new Color("INOA", "6", 15);
+                Color colorTwo = new Color("INOA", "6.5", 28);
+                Formula formula = new Formula(45, 85);
+                formula.add(oxidantOne);
+                formula.add(oxidantTwo);
+                formula.add(colorOne);
+                formula.add(colorTwo);
+
+//                formulaDao.insertFormula(formula);
+
+                intent = new Intent(FormulaActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    public void setupSpinners(){
-        setupOxidantSpinners();
+    @Override
+    public void onBackPressed() {
     }
-
-    public void setupOxidantSpinners(){
-        setupSpinnerOxidantManufacturerOne();
-        setupSpinnerOxidantManufacturerTwo();
-        setupSpinnerOxidantProductOne();
-        setupSpinnerOxidantProductTwo();
-    }
-
-    private void setupSpinnerOxidantManufacturerOne() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantManufacturerOne);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.oxidants_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
-    private void setupSpinnerOxidantManufacturerTwo() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantManufacturerOne);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.oxidants_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
-    private void setupSpinnerOxidantProductOne() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantProductOne);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.oxidants_product_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
-    private void setupSpinnerOxidantProductTwo() {
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerOxidantProductOne);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.oxidants_product_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-    }
-
 }

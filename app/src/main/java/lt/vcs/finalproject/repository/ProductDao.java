@@ -20,7 +20,7 @@ public interface ProductDao {
     Product getItem(int productId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertProducts(List<Product> customers);
+    void insertProducts(List<Product> products);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertProduct(Product product);

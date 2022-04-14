@@ -20,18 +20,181 @@
     <string name="add_formula_price">Add formula price</string>
 
 
-    <string-array name="oxidants_array">
+    <string-array name="oxidants_manufacturer_array">
+        <item></item>
         <item>Inoa Oxidant</item>
         <item>Other Oxidant</item>
-        <item> </item>
     </string-array>
 
-    <string-array name="oxidants_product_array">
+    <string-array name="oxidants_products_array">
+        <item></item>
         <item>3%</item>
         <item>6%</item>
         <item>9%</item>
-        <item> </item>
     </string-array>
 
+    <string-array name="color_manufacturer_array">
+        <item></item>
+        <item>INOA</item>
+        <item>INOA Bronzing</item>
+        <item>INOA Carmilane</item>
+        <item>INOA Fundamentals</item>
+        <item>INOA Glow</item>
+        <item>INOA High Resist</item>
+        <item>INOA Marron Resist</item>
+        <item>INOA Rubilane</item>
+        <item>INOA Supreme</item>
+    </string-array>
+
+    <string-array name="color_empty_products_array">
+        <item></item>
+    </string-array>
+
+    <string-array name="color_inoa_products_array">
+        <item>Clear</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>4.0</item>
+        <item>5.0</item>
+        <item>6.0</item>
+        <item>7.0</item>
+        <item>8.0</item>
+        <item>9.0</item>
+        <item>4.15</item>
+        <item>4.3</item>
+        <item>4.35</item>
+        <item>4.45</item>
+        <item>4.8</item>
+        <item>5.17</item>
+        <item>5.18</item>
+        <item>5.3</item>
+        <item>5.32</item>
+        <item>5.35</item>
+        <item>5.4</item>
+        <item>5.42</item>
+        <item>5.45</item>
+        <item>5.8</item>
+        <item>6.1</item>
+        <item>6.11</item>
+        <item>6.13</item>
+        <item>6.18</item>
+        <item>6.20</item>
+        <item>6.23</item>
+        <item>6.24</item>
+        <item>6.3</item>
+        <item>6.32</item>
+        <item>6.34</item>
+        <item>6.35</item>
+        <item>6.42</item>
+        <item>6.45</item>
+        <item>6.46</item>
+        <item>6.8</item>
+        <item>7.1</item>
+        <item>7.18</item>
+        <item>7.23</item>
+        <item>7.3</item>
+        <item>7.31</item>
+        <item>7.34</item>
+        <item>7.35</item>
+        <item>7.4</item>
+        <item>7.42</item>
+        <item>7.43</item>
+        <item>7.44</item>
+        <item>7.8</item>
+        <item>8.1</item>
+        <item>8.11</item>
+        <item>8.12</item>
+        <item>8.13</item>
+        <item>8.23</item>
+        <item>8.3</item>
+        <item>8.31</item>
+        <item>8.34</item>
+        <item>8.8</item>
+        <item>9.1</item>
+        <item>9.11</item>
+        <item>9.13</item>
+        <item>9.2</item>
+        <item>9.3</item>
+        <item>9.31</item>
+        <item>9.32</item>
+        <item>10.1</item>
+        <item>10.11</item>
+        <item>10.12</item>
+        <item>10.21</item>
+        <item>10/2.21</item>
+    </string-array>
+
+    <string-array name="color_inoa_bronzing_products_array">
+        <item>Rose Quartz Bronze .23</item>
+        <item>Garnet Bronze .24</item>
+    </string-array>
+
+    <string-array name="color_inoa_carmilane_products_array">
+        <item>4.62</item>
+        <item>5.6</item>
+        <item>5.62</item>
+        <item>6.66</item>
+    </string-array>
+
+    <string-array name="color_inoa_fundamentals_products_array">
+        <item>5.3</item>
+        <item>6.3</item>
+        <item>7.3</item>
+        <item>8.3</item>
+        <item>9.3</item>
+    </string-array>
+
+    <string-array name="color_inoa_glow_products_array">
+        <item>L8</item>
+        <item>L13</item>
+        <item>L21</item>
+        <item>L23</item>
+        <item>L28</item>
+        <item>D1</item>
+        <item>D12</item>
+        <item>D13</item>
+        <item>D18</item>
+    </string-array>
+
+    <string-array name="color_inoa_hresist_products_array">
+        <item>7.11</item>
+        <item>8.21</item>
+        <item>8.22</item>
+        <item>9.12</item>
+        <item>9.22</item>
+    </string-array>
+
+    <string-array name="color_inoa_mresist_products_array">
+        <item>4.65</item>
+        <item>5.12</item>
+        <item>5.15</item>
+        <item>5.25</item>
+    </string-array>
+
+    <string-array name="color_inoa_rubilane_products_array">
+        <item>6.40</item>
+    </string-array>
+
+    <string-array name="color_inoa_supreme_products_array">
+        <item>6.31</item>
+        <item>6.23</item>
+        <item>7.31</item>
+        <item>7.32</item>
+        <item>7.34</item>
+        <item>8.13</item>
+        <item>8.31</item>
+        <item>9.13</item>
+        <item>9.31</item>
+        <item>9.32</item>
+        <item>10.13</item>
+    </string-array>
 
 </resources>
