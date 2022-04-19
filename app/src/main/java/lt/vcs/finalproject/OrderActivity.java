@@ -1,7 +1,6 @@
 package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,20 +13,20 @@ import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
 import lt.vcs.finalproject.repository.OrderDao;
+import lt.vcs.finalproject.repository.OrderDetails;
+import lt.vcs.finalproject.repository.OrderDetailsDao;
 
 public class OrderActivity extends AppCompatActivity {
 
     private Button closeButton;
     private Intent intent;
-    private TextView textView;
-    private Customer customer;
+    private OrderDetails orderDetails;
 
-    private CustomerDao customerDao;
-    private FormulaDao formulaDao;
-    private OrderDao orderDao;
+    private OrderDetailsDao orderDetailsDao;
 
-    private TextView orderTextView;
-
+    private TextView firstAndLastNameTextView;
+    private TextView oxidantsAndColorsTextView;
+    private TextView timeAndPriceTextView;
 
     int customerId;
 
@@ -44,20 +43,20 @@ public class OrderActivity extends AppCompatActivity {
         customerId = intent.getIntExtra("lt.vcs.finalproject.mainactivity.customerid", 0);
 
         MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
-        customerDao = mainDatabase.customerDao();
-        formulaDao = mainDatabase.formulaDao();
-        orderDao = mainDatabase.orderDao();
+        orderDetailsDao = mainDatabase.orderDetailsDao();
 
-        customer = customerDao.getItem(customerId);
-
-        orderTextView.setText(String.valueOf(customer.getCustomerId()));
+        orderDetails = orderDetailsDao.getItem(customerId);
+        firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
+        oxidantsAndColorsTextView.setText("Oxidants: " + orderDetails.getOxidants() + "\nColors: " + orderDetails.getColors());
+        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + "\nPrice: " + orderDetails.getFormulaPrice());
 
     }
 
     private void setupUI() {
         setContentView(R.layout.activity_order);
-        orderTextView = findViewById(R.id.orderTextView);
-
+        firstAndLastNameTextView = findViewById(R.id.firstAndLastNameTextView);
+        oxidantsAndColorsTextView = findViewById(R.id.oxidantsAndColorsTextView);
+        timeAndPriceTextView = findViewById(R.id.timeAndPriceTextView);
     }
 
     private void setUpCloseButton() {

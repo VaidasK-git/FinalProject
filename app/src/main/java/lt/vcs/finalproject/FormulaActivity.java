@@ -35,7 +35,10 @@ public class FormulaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formula);
 
-        connectToDatabase();
+        MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
+        orderDao = mainDatabase.orderDao();
 
         setUpSpinners();
 
@@ -44,22 +47,6 @@ public class FormulaActivity extends AppCompatActivity {
         intent = getIntent();
 
         onBackPressed();
-    }
-
-    private void connectToDatabase() {
-        MainDatabase mainDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        MainDatabase.class,
-                        "main.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-        orderDao = mainDatabase.orderDao();
-        formulaDao = mainDatabase.formulaDao();
-        customerDao = mainDatabase.customerDao();
-
     }
 
     private void setUpSpinners() {
@@ -280,7 +267,7 @@ public class FormulaActivity extends AppCompatActivity {
                 int customerId = customerDao.getMaxCustomerId();
                 int formulaId = formulaDao.getMaxFormulaId();
                 Order order = new Order(customerId, formulaId);
-                
+
                 orderDao.insertOrder(order);
 
                 //orderDao.deleteItem(3);

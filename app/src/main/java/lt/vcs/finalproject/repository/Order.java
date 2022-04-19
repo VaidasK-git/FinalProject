@@ -43,7 +43,4 @@ public class Order {
         return formulaId;
     }
 
-    public void setFormulaId(int formulaId) {
-        this.formulaId = formulaId;
-    }
 }

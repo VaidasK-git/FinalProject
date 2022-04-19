@@ -2,17 +2,13 @@ package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +16,11 @@ import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
-import lt.vcs.finalproject.repository.OrderDao;
-import lt.vcs.finalproject.repository.Product;
-import lt.vcs.finalproject.repository.ProductDao;
 
 public class MainActivity extends AppCompatActivity {
 
     List<Customer> customersList;
-    ArrayAdapter<Customer> arrayAdapter;
+    ArrayAdapter arrayAdapter;
 
     ListView elementListView;
     Button addButton;
@@ -38,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     CustomerDao customerDao;
     FormulaDao formulaDao;
-    OrderDao orderDao;
 
 
     @Override
@@ -49,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
         customerDao = mainDatabase.customerDao();
         formulaDao = mainDatabase.formulaDao();
-        orderDao = mainDatabase.orderDao();
 
         customersList = new ArrayList();
         customersList = customerDao.getAll();
@@ -71,55 +62,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpListViewItemClick() {
-        elementListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                intent = new Intent(MainActivity.this, OrderActivity.class);
-                clickedCustomer = customersList.get(position);
-                intent.putExtra("lt.vcs.finalproject.mainactivity.customerid", clickedCustomer.getCustomerId());
-                startActivity(intent);
-            }
+        elementListView.setOnItemClickListener((adapterView, view, position, l) -> {
+            intent = new Intent(MainActivity.this, OrderActivity.class);
+            clickedCustomer = customersList.get(position);
+            intent.putExtra("lt.vcs.finalproject.mainactivity.customerid", clickedCustomer.getCustomerId());
+            startActivity(intent);
         });
     }
 
     private void setUpDialogBuilder(int position) {
         builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you would like to delete customer?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                customersList.remove(position);
-                arrayAdapter.notifyDataSetChanged();
-            }
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            customersList.remove(position);
+            arrayAdapter.notifyDataSetChanged();
         });
         builder.setNegativeButton("No", null);
         builder.show();
     }
 
     private void setUpListViewItemLongClick() {
-        elementListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(
-                    AdapterView<?> adapterView,
-                    View view,
-                    int position,
-                    long id) {
+        elementListView.setOnItemLongClickListener((adapterView, view, position, id) -> {
 //                customerDao.deleteItem(position);
 //                formulaDao.deleteItem(position);
-                setUpDialogBuilder(position);
-                return true;
-            }
+            setUpDialogBuilder(position);
+            return true;
         });
     }
 
     private void setUpAddButtonClick() {
         addButton = findViewById(R.id.addButton);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainActivity.this, CustomerActivity.class);
-                startActivity(intent);
-            }
+        addButton.setOnClickListener(view -> {
+            intent = new Intent(MainActivity.this, CustomerActivity.class);
+            startActivity(intent);
         });
 
     }

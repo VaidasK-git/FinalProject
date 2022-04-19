@@ -2,10 +2,14 @@ package lt.vcs.finalproject.repository;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
+import androidx.room.DatabaseView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import lt.vcs.finalproject.Constants;
 
@@ -18,11 +22,14 @@ import lt.vcs.finalproject.Constants;
 public abstract class MainDatabase extends RoomDatabase {
 
     private static MainDatabase instance;
+    private static final int newVersionDb = Constants.MAIN_DATABASE_VERSION;
+    private static final int previousVersionDb = newVersionDb - 1;
 
     public abstract CustomerDao customerDao();
     public abstract FormulaDao formulaDao();
     public abstract ProductDao productDao();
     public abstract OrderDao orderDao();
+    public abstract OrderDetailsDao orderDetailsDao();
 
     public static synchronized MainDatabase getInstance(Context context) {
         if (instance == null) {
@@ -38,6 +45,16 @@ public abstract class MainDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    private static final Migration MIGRATION_1_2 = new Migration(
+            previousVersionDb,
+            newVersionDb
+    ) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+
+        }
+    };
 
 
 }

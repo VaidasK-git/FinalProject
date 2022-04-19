@@ -1,5 +1,7 @@
 package lt.vcs.finalproject.repository;
 
+import androidx.annotation.NonNull;
+
 public class Ingredient {
 
     private String productManufacturer;
@@ -12,10 +14,10 @@ public class Ingredient {
         this.productWeight = productWeight;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return String.valueOf(new StringBuilder().append(productManufacturer).append(" ").
-                append(productName).append(" ").append(productWeight));
+        return productManufacturer + " " + productName + " " + productWeight;
     }
 
 }

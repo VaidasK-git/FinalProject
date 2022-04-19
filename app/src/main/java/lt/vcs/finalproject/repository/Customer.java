@@ -1,5 +1,6 @@
 package lt.vcs.finalproject.repository;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -43,29 +44,18 @@ public class Customer implements Serializable {
         return customerFirstName;
     }
 
-    public void setCustomerFirstName(String customerFirstName) {
-        this.customerFirstName = customerFirstName;
-    }
-
     public String getCustomerLastName() {
         return customerLastName;
-    }
-
-    public void setCustomerLastName(String customerLastName) {
-        this.customerLastName = customerLastName;
     }
 
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
 
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
-    }
-
+    @NonNull
     @Override
     public String toString() {
-        return customerId + " " +customerFirstName + " " + customerLastName;
+        return customerFirstName + " " + customerLastName;
     }
 
 }

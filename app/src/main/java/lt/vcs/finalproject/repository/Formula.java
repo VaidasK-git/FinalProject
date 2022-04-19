@@ -3,7 +3,6 @@ package lt.vcs.finalproject.repository;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import java.util.ArrayList;
 
@@ -62,16 +61,8 @@ public class Formula implements Add {
         return formulaTime;
     }
 
-    public void setFormulaTime(int formulaTime) {
-        this.formulaTime = formulaTime;
-    }
-
     public int getFormulaPrice() {
         return formulaPrice;
-    }
-
-    public void setFormulaPrice(int formulaPrice) {
-        this.formulaPrice = formulaPrice;
     }
 
     public void add(Oxidant oxidant) {

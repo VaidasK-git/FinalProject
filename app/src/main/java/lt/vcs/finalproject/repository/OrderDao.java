@@ -33,4 +33,8 @@ public interface OrderDao {
 
     @Query("DELETE FROM " + Constants.ENTITY_ORDERS_TABLE + " WHERE orderId =:orderId")
     void deleteItem(int orderId);
+
+    @Query("SELECT * FROM " + Constants.ENTITY_ORDER_DETAILS_TABLE + " WHERE customerId =:orderId")
+    OrderDetails getItemO(int orderId);
+
 }

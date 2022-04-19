@@ -1,7 +1,5 @@
 package lt.vcs.finalproject.repository;
 
-import android.content.Intent;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
