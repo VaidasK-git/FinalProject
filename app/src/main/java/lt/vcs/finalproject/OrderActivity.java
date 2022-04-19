@@ -13,49 +13,50 @@ import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.OrderDao;
 
 public class OrderActivity extends AppCompatActivity {
 
-    Button closeButton;
-    Intent intent;
-    TextView textView;
-    Customer customer;
-    CustomerDao customerDao;
-    FormulaDao formulaDao;
+    private Button closeButton;
+    private Intent intent;
+    private TextView textView;
+    private Customer customer;
+
+    private CustomerDao customerDao;
+    private FormulaDao formulaDao;
+    private OrderDao orderDao;
+
+    private TextView orderTextView;
+
+
+    int customerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+
+        setupUI();
 
         setUpCloseButton();
 
         intent = getIntent();
 
-        int customerId = intent.getIntExtra(Constants.ENTITY_CUSTOMERS_TABLE, 0);
+        customerId = intent.getIntExtra("lt.vcs.finalproject.mainactivity.customerid", 0);
 
-        connectToDatabase();
+        MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
+        orderDao = mainDatabase.orderDao();
 
         customer = customerDao.getItem(customerId);
 
-        textView = findViewById(R.id.orderTextView);
-
-        textView.setText(String.valueOf(customer));
+        orderTextView.setText(String.valueOf(customer.getCustomerId()));
 
     }
 
-    private void connectToDatabase() {
-        MainDatabase mainDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        MainDatabase.class,
-                        "main.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-        customerDao = mainDatabase.customerDao();
-        formulaDao = mainDatabase.formulaDao();
+    private void setupUI() {
+        setContentView(R.layout.activity_order);
+        orderTextView = findViewById(R.id.orderTextView);
 
     }
 

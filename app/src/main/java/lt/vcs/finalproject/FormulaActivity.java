@@ -280,9 +280,10 @@ public class FormulaActivity extends AppCompatActivity {
                 int customerId = customerDao.getMaxCustomerId();
                 int formulaId = formulaDao.getMaxFormulaId();
                 Order order = new Order(customerId, formulaId);
+                
                 orderDao.insertOrder(order);
 
-//                orderDao.deleteItem(3);
+                //orderDao.deleteItem(3);
 
                 intent = new Intent(FormulaActivity.this, MainActivity.class);
                 startActivity(intent);

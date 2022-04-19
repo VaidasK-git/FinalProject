@@ -6,8 +6,4 @@ public class Color extends Ingredient {
         super(productManufacturer, productName, productWeight);
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

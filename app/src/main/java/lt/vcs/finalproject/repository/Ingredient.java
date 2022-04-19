@@ -14,7 +14,8 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return productManufacturer + " " + productName + productWeight;
+        return String.valueOf(new StringBuilder().append(productManufacturer).append(" ").
+                append(productName).append(" ").append(productWeight));
     }
 
 }

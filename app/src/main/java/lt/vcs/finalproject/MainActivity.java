@@ -20,6 +20,7 @@ import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.OrderDao;
 import lt.vcs.finalproject.repository.Product;
 import lt.vcs.finalproject.repository.ProductDao;
 
@@ -27,23 +28,30 @@ public class MainActivity extends AppCompatActivity {
 
     List<Customer> customersList;
     ArrayAdapter<Customer> arrayAdapter;
+
     ListView elementListView;
-    CustomerDao customerDao;
-    FormulaDao formulaDao;
-    Customer clickedCustomer;
     Button addButton;
+
+    Customer clickedCustomer;
     Intent intent;
     AlertDialog.Builder builder;
+
+    CustomerDao customerDao;
+    FormulaDao formulaDao;
+    OrderDao orderDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        connectToDatabase();
+        MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
+        customerDao = mainDatabase.customerDao();
+        formulaDao = mainDatabase.formulaDao();
+        orderDao = mainDatabase.orderDao();
 
         customersList = new ArrayList();
-
         customersList = customerDao.getAll();
 
         setUpListView();
@@ -53,21 +61,6 @@ public class MainActivity extends AppCompatActivity {
         setUpAddButtonClick();
 
         intent = getIntent();
-
-    }
-
-    private void connectToDatabase() {
-        MainDatabase mainDatabase =
-                Room.databaseBuilder(
-                        getApplicationContext(),
-                        MainDatabase.class,
-                        "main.db"
-                ).allowMainThreadQueries()
-                        .fallbackToDestructiveMigration()
-                        .build();
-
-        customerDao = mainDatabase.customerDao();
-        formulaDao = mainDatabase.formulaDao();
 
     }
 
@@ -83,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 intent = new Intent(MainActivity.this, OrderActivity.class);
                 clickedCustomer = customersList.get(position);
-                intent.putExtra("Message", clickedCustomer.getCustomerId());
+                intent.putExtra("lt.vcs.finalproject.mainactivity.customerid", clickedCustomer.getCustomerId());
                 startActivity(intent);
             }
         });
@@ -111,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
                     View view,
                     int position,
                     long id) {
-                customerDao.deleteItem(position);
+//                customerDao.deleteItem(position);
+//                formulaDao.deleteItem(position);
                 setUpDialogBuilder(position);
                 return true;
             }
