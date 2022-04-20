@@ -18,7 +18,7 @@
     <string name="formula_holding_time">Formula holding time</string>
     <string name="add_formula_holding_time">Add formula holding time</string>
     <string name="add_formula_price">Add formula price</string>
-    <string name="close_button_Order">Close and Copy</string>
+    <string name="close_button_Order">Close</string>
 
 
     <string-array name="oxidants_manufacturer_array">

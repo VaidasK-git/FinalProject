@@ -2,13 +2,19 @@ package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +61,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_bar, menu);
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchBar).getActionView();
+
+        searchView.getQueryHint();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void setUpListView() {
         elementListView = findViewById(R.id.customerListView);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, customersList);
@@ -75,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
         builder.setMessage("Are you sure you would like to delete customer?");
         builder.setPositiveButton("Yes", (dialogInterface, i) -> {
             customersList.remove(position);
+            customerDao.deleteItem(position);
+            formulaDao.deleteItem(position);
             arrayAdapter.notifyDataSetChanged();
         });
         builder.setNegativeButton("No", null);
@@ -83,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpListViewItemLongClick() {
         elementListView.setOnItemLongClickListener((adapterView, view, position, id) -> {
-//                customerDao.deleteItem(position);
-//                formulaDao.deleteItem(position);
             setUpDialogBuilder(position);
             return true;
         });

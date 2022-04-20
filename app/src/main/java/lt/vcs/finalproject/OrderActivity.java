@@ -1,7 +1,12 @@
 package lt.vcs.finalproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +32,7 @@ public class OrderActivity extends AppCompatActivity {
     private TextView firstAndLastNameTextView;
     private TextView oxidantsAndColorsTextView;
     private TextView timeAndPriceTextView;
+    private AlertDialog.Builder builder;
 
     int customerId;
 
@@ -35,6 +41,8 @@ public class OrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setupUI();
+
+        oxidantsAndColorsTextViewClick();
 
         setUpCloseButton();
 
@@ -57,6 +65,25 @@ public class OrderActivity extends AppCompatActivity {
         firstAndLastNameTextView = findViewById(R.id.firstAndLastNameTextView);
         oxidantsAndColorsTextView = findViewById(R.id.oxidantsAndColorsTextView);
         timeAndPriceTextView = findViewById(R.id.timeAndPriceTextView);
+    }
+
+    private void oxidantsAndColorsTextViewClick() {
+        oxidantsAndColorsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setUpMessageBuilder();
+                android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                android.content.ClipData clip = android.content.ClipData.newPlainText("text label", oxidantsAndColorsTextView.getText());
+                clipboard.setPrimaryClip(clip);
+            }
+        });
+    }
+
+    private void setUpMessageBuilder() {
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage("Text was copied to clipboard");
+        builder.setNeutralButton("Ok", null);
+        builder.show();
     }
 
     private void setUpCloseButton() {
