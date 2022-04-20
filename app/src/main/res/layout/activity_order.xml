@@ -9,7 +9,8 @@
     <TextView
         android:id="@+id/firstAndLastNameTextView"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="0dp"
+        android:maxLines="5"
         android:layout_marginStart="16dp"
         android:layout_marginTop="74dp"
         android:layout_marginEnd="16dp"
@@ -27,6 +28,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="96dp"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/closeButtonOrder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstAndLastNameTextView" />
@@ -35,12 +37,12 @@
         android:id="@+id/timeAndPriceTextView"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/oxidantsAndColorsTextView"
+        app:layout_constraintStart_toStartOf="@+id/oxidantsAndColorsTextView"
         app:layout_constraintTop_toBottomOf="@+id/oxidantsAndColorsTextView" />
 
     <Button

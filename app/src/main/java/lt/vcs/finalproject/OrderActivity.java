@@ -3,7 +3,6 @@ package lt.vcs.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,20 +14,16 @@ import java.util.List;
 import lt.vcs.finalproject.repository.local.FormulaDao;
 import lt.vcs.finalproject.repository.local.MainDatabase;
 import lt.vcs.finalproject.repository.local.OrderDao;
-import lt.vcs.finalproject.repository.model.Formula;
-import lt.vcs.finalproject.repository.model.Order;
+import lt.vcs.finalproject.repository.local.OrderDetailsDao;
+import lt.vcs.finalproject.repository.model.OrderDetails;
 
 public class OrderActivity extends AppCompatActivity {
 
     private Button closeButton;
     private Intent intent;
-    //    private OrderDetails orderDetails;
-    private Order orderDetails;
-    private Formula formulaDetails;
+    private OrderDetails orderDetails;
 
-    //    private OrderDetailsDao orderDetailsDao;
-    private OrderDao orderDao;
-    private FormulaDao formulaDao;
+    private OrderDetailsDao orderDetailsDao;
 
     private TextView firstAndLastNameTextView;
     private TextView oxidantsAndColorsTextView;
@@ -36,7 +31,6 @@ public class OrderActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
 
     private int customerId;
-    private int formulaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +47,21 @@ public class OrderActivity extends AppCompatActivity {
         customerId = intent.getIntExtra("lt.vcs.finalproject.mainactivity.customerid", 0);
 
         MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
-//        orderDetailsDao = mainDatabase.orderDetailsDao();
-        orderDao = mainDatabase.orderDao();
+        orderDetailsDao = mainDatabase.orderDetailsDao();
 
-        orderDetails = orderDao.getItem(customerId);
-        formulaId = orderDetails.getFormulaId();
+        orderDetails = orderDetailsDao.getItem(customerId);
 
-        formulaDao = mainDatabase.formulaDao();
-        formulaDetails = formulaDao.getItem(formulaId);
-
-//        getPlainTextFromList(formulaDetails.getOxidants());
-
-//        firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
+        firstAndLastNameTextView.setText(
+                "First Name: " + orderDetails.getCustomerFirstName() + " \n" +
+                        "Last Name: " + orderDetails.getCustomerLastName() + " \n" +
+                        "Phone: " + orderDetails.getCustomerPhoneNumber());
 
         oxidantsAndColorsTextView.setText(
                 "Oxidants: \n" +
-                        getPlainTextFromList(formulaDetails.getOxidants()) +
-                        "\n\nColors:\n" +
-                        getPlainTextFromList(formulaDetails.getColors()));
-//        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + "\nPrice: " + orderDetails.getFormulaPrice());
+                        getPlainTextFromList(orderDetails.getOxidants()) +
+                        "\nColors:\n" +
+                        getPlainTextFromList(orderDetails.getColors()));
+        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + "\nPrice: " + orderDetails.getFormulaPrice());
 
     }
 
@@ -105,7 +95,7 @@ public class OrderActivity extends AppCompatActivity {
 
     private <T> String getPlainTextFromList(List<T> list) {
         String resultText = "";
-        for (T item: list){
+        for (T item : list) {
             resultText += item.toString() + "\n";
         }
         return resultText;
