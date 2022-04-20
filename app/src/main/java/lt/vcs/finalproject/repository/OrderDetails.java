@@ -2,6 +2,8 @@ package lt.vcs.finalproject.repository;
 
 import androidx.room.DatabaseView;
 
+import java.util.ArrayList;
+
 @DatabaseView("SELECT customers.customerId, customers.customerFirstName, customers.customerLastName, customers.customerPhoneNumber, formulas.oxidants, formulas.colors, formulas.formulaTime, formulas.formulaPrice\n" +
         "FROM customers\n" +
         "JOIN orders ON orders.customerId = customers.customerId\n" +
@@ -11,8 +13,8 @@ public class OrderDetails {
     public String customerFirstName;
     public String customerLastName;
     public String customerPhoneNumber;
-    public String oxidants;
-    public String colors;
+    public ArrayList<Oxidant> oxidants;
+    public ArrayList<Color> colors;
     public int formulaTime;
     public int formulaPrice;
 
@@ -36,11 +38,11 @@ public class OrderDetails {
         return customerPhoneNumber;
     }
 
-    public String getOxidants() {
+    public ArrayList<Oxidant> getOxidants() {
         return oxidants;
     }
 
-    public String getColors() {
+    public ArrayList<Color> getColors() {
         return colors;
     }
 

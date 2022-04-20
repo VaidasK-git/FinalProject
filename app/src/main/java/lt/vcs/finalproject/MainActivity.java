@@ -29,7 +29,7 @@ import lt.vcs.finalproject.repository.MainDatabase;
 public class MainActivity extends AppCompatActivity {
 
     ListView searchListView;
-    List<Customer> customerNameList;
+    List<String> customerNameList;
 
     List<Customer> customersList;
     ArrayAdapter arrayAdapter;
@@ -57,13 +57,12 @@ public class MainActivity extends AppCompatActivity {
         customersList = new ArrayList();
         customersList = customerDao.getAll();
 
-//        customerNameList = new ArrayList();
-//        customerNameList = customerDao.getAllNames();
+        customerNameList = new ArrayList();
+        customerNameList = customerDao.getAllNames();
 
 //        searchListView = findViewById(R.id.searchListView);
-//        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, customerNameList);
 //        searchListView.setAdapter(arrayAdapter);
-
+//        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, customerNameList);
 
         setUpListView();
         setUpListViewItemClick();
@@ -105,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpListView() {
         elementListView = findViewById(R.id.customerListView);
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, customersList);
+
         elementListView.setAdapter(arrayAdapter);
     }
 

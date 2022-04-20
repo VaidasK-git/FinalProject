@@ -17,7 +17,7 @@ public class Ingredient {
     @NonNull
     @Override
     public String toString() {
-        return productManufacturer + " " + productName + " " + productWeight;
+        return productManufacturer + " " + productName + " " + "(" + productWeight + ")";
     }
 
 }

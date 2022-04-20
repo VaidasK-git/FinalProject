@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.List;
+
 import lt.vcs.finalproject.repository.Customer;
 import lt.vcs.finalproject.repository.CustomerDao;
 import lt.vcs.finalproject.repository.FormulaDao;
@@ -56,9 +58,20 @@ public class OrderActivity extends AppCompatActivity {
         orderDetailsDao = mainDatabase.orderDetailsDao();
 
         orderDetails = orderDetailsDao.getItem(customerId);
-        firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
-        oxidantsAndColorsTextView.setText("Oxidants: " + orderDetails.getOxidants() + "\nColors: " + orderDetails.getColors());
-        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min.\nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
+
+        firstAndLastNameTextView.setText(
+                "Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
+
+        oxidantsAndColorsTextView.setText(
+                "Oxidants: \n" +
+                        getPlainTextFromList(orderDetails.getOxidants()) +
+                        "\nColors:\n" +
+                        getPlainTextFromList(orderDetails.getColors()));
+        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min. \nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
+
+//        firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
+//        oxidantsAndColorsTextView.setText("Oxidants: " + orderDetails.getOxidants() + "\nColors: " + orderDetails.getColors());
+//        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min.\nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
 
     }
 
@@ -96,5 +109,13 @@ public class OrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private <T> String getPlainTextFromList(List<T> list) {
+        String resultText = "";
+        for (T item : list) {
+            resultText += item.toString() + "\n";
+        }
+        return resultText;
     }
 }
