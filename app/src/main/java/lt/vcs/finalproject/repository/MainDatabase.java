@@ -39,6 +39,7 @@ public abstract class MainDatabase extends RoomDatabase {
                             MainDatabase.class,
                             "main.db"
                     )
+                            .addMigrations(MIGRATION_1_2)
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
                             .build();

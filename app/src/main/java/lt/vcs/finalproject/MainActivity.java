@@ -7,10 +7,13 @@ import androidx.appcompat.widget.SearchView;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -24,6 +27,9 @@ import lt.vcs.finalproject.repository.FormulaDao;
 import lt.vcs.finalproject.repository.MainDatabase;
 
 public class MainActivity extends AppCompatActivity {
+
+    ListView searchListView;
+    List<Customer> customerNameList;
 
     List<Customer> customersList;
     ArrayAdapter arrayAdapter;
@@ -50,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
 
         customersList = new ArrayList();
         customersList = customerDao.getAll();
+
+//        customerNameList = new ArrayList();
+//        customerNameList = customerDao.getAllNames();
+
+//        searchListView = findViewById(R.id.searchListView);
+//        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, customerNameList);
+//        searchListView.setAdapter(arrayAdapter);
+
 
         setUpListView();
         setUpListViewItemClick();
@@ -79,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+
+//                arrayAdapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -104,22 +120,36 @@ public class MainActivity extends AppCompatActivity {
     private void setUpDialogBuilder(int position) {
         builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you would like to delete customer?");
-        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
-            customersList.remove(position);
-            customerDao.deleteItem(position);
-            formulaDao.deleteItem(position);
-            arrayAdapter.notifyDataSetChanged();
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                customerDao.deleteItem(clickedCustomer.getCustomerId());
+                formulaDao.deleteItem(clickedCustomer.getCustomerId());
+
+                customersList.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+            }
         });
         builder.setNegativeButton("No", null);
         builder.show();
     }
 
     private void setUpListViewItemLongClick() {
-        elementListView.setOnItemLongClickListener((adapterView, view, position, id) -> {
-            setUpDialogBuilder(position);
-            return true;
+        elementListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(
+                    AdapterView<?> adapterView,
+                    View view,
+                    int position,
+                    long id) {
+                setUpDialogBuilder(position);
+                clickedCustomer = customersList.get(position);
+                return true;
+            }
         });
     }
+
 
     private void setUpAddButtonClick() {
         addButton = findViewById(R.id.addButton);

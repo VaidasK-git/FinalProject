@@ -17,6 +17,9 @@ public interface CustomerDao {
     @Query("SELECT * FROM " + Constants.ENTITY_CUSTOMERS_TABLE)
     List<Customer> getAll();
 
+//    @Query("SELECT customerFirstName FROM " + Constants.ENTITY_CUSTOMERS_TABLE)
+//    List<Customer> getAllNames();
+
     @Query("SELECT * FROM " + Constants.ENTITY_CUSTOMERS_TABLE + " WHERE customerId =:customerId")
     Customer getItem(int customerId);
 

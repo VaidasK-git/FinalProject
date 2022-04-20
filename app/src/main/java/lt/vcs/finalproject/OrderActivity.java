@@ -3,6 +3,7 @@ package lt.vcs.finalproject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class OrderActivity extends AppCompatActivity {
 
     int customerId;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,7 @@ public class OrderActivity extends AppCompatActivity {
         orderDetails = orderDetailsDao.getItem(customerId);
         firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
         oxidantsAndColorsTextView.setText("Oxidants: " + orderDetails.getOxidants() + "\nColors: " + orderDetails.getColors());
-        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + "\nPrice: " + orderDetails.getFormulaPrice());
+        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min.\nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
 
     }
 
