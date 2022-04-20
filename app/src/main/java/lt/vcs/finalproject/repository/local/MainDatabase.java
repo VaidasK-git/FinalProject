@@ -1,10 +1,9 @@
-package lt.vcs.finalproject.repository;
+package lt.vcs.finalproject.repository.local;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
-import androidx.room.DatabaseView;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
@@ -12,6 +11,11 @@ import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import lt.vcs.finalproject.Constants;
+import lt.vcs.finalproject.repository.model.Order;
+import lt.vcs.finalproject.repository.model.OrderDetails;
+import lt.vcs.finalproject.repository.model.Product;
+import lt.vcs.finalproject.repository.model.Customer;
+import lt.vcs.finalproject.repository.model.Formula;
 
 @Database(
         entities = {Customer.class, Formula.class, Product.class, Order.class},

@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/1_Lectures/VCS/03_final_projects/VCS-ATS-VAK-20220310/Vaidotas/vaidotas_final_project/app/src/main/res/layout/activity_customer.xml" value="0.17249240121580547" />
+        <entry key="..\:/1_Lectures/VCS/03_final_projects/VCS-ATS-VAK-20220310/Vaidotas/vaidotas_final_project/app/src/main/res/layout/activity_main.xml" value="0.17249240121580547" />
+        <entry key="..\:/1_Lectures/VCS/03_final_projects/VCS-ATS-VAK-20220310/Vaidotas/vaidotas_final_project/app/src/main/res/layout/activity_order.xml" value="0.25" />
         <entry key="..\:/Users/Vukas/Documents/2_Vaido/1_Kursai/1_VCS/2_Java/FinalProject/app/src/main/res/drawable/customborder.xml" value="0.2485" />
         <entry key="..\:/Users/Vukas/Documents/2_Vaido/1_Kursai/1_VCS/2_Java/FinalProject/app/src/main/res/drawable/line.xml" value="0.2485" />
         <entry key="..\:/Users/Vukas/Documents/2_Vaido/1_Kursai/1_VCS/2_Java/FinalProject/app/src/main/res/layout/activity_customer.xml" value="0.25416666666666665" />
@@ -13,7 +16,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

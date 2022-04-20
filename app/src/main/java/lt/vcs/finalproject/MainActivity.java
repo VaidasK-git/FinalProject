@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,10 +16,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import lt.vcs.finalproject.repository.Customer;
-import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.FormulaDao;
-import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.model.Customer;
+import lt.vcs.finalproject.repository.local.CustomerDao;
+import lt.vcs.finalproject.repository.local.FormulaDao;
+import lt.vcs.finalproject.repository.local.MainDatabase;
 
 public class MainActivity extends AppCompatActivity {
 

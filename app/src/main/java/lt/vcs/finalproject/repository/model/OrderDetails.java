@@ -1,4 +1,4 @@
-package lt.vcs.finalproject.repository;
+package lt.vcs.finalproject.repository.model;
 
 import androidx.room.DatabaseView;
 

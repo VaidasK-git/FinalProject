@@ -1,7 +1,6 @@
-package lt.vcs.finalproject.repository;
+package lt.vcs.finalproject.repository.local;
 
 import androidx.room.TypeConverter;
-
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -9,6 +8,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import lt.vcs.finalproject.repository.model.Color;
+import lt.vcs.finalproject.repository.model.Oxidant;
 
 public class Converters {
     @TypeConverter

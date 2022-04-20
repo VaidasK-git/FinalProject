@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import lt.vcs.finalproject.repository.Customer;
-import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.MainDatabase;
+import lt.vcs.finalproject.repository.model.Customer;
+import lt.vcs.finalproject.repository.local.CustomerDao;
+import lt.vcs.finalproject.repository.local.MainDatabase;
 
 public class CustomerActivity extends AppCompatActivity {
 

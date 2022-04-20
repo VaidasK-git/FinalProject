@@ -1,8 +1,6 @@
 package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import lt.vcs.finalproject.repository.Color;
-import lt.vcs.finalproject.repository.CustomerDao;
-import lt.vcs.finalproject.repository.Formula;
-import lt.vcs.finalproject.repository.FormulaDao;
-import lt.vcs.finalproject.repository.MainDatabase;
-import lt.vcs.finalproject.repository.Order;
-import lt.vcs.finalproject.repository.OrderDao;
-import lt.vcs.finalproject.repository.Oxidant;
+import lt.vcs.finalproject.repository.model.Color;
+import lt.vcs.finalproject.repository.local.CustomerDao;
+import lt.vcs.finalproject.repository.model.Formula;
+import lt.vcs.finalproject.repository.local.FormulaDao;
+import lt.vcs.finalproject.repository.local.MainDatabase;
+import lt.vcs.finalproject.repository.model.Order;
+import lt.vcs.finalproject.repository.local.OrderDao;
+import lt.vcs.finalproject.repository.model.Oxidant;
 
 public class FormulaActivity extends AppCompatActivity {
 

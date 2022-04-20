@@ -1,4 +1,4 @@
-package lt.vcs.finalproject.repository;
+package lt.vcs.finalproject.repository.local;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,6 +9,8 @@ import androidx.room.Query;
 import java.util.List;
 
 import lt.vcs.finalproject.Constants;
+import lt.vcs.finalproject.repository.model.Order;
+import lt.vcs.finalproject.repository.model.OrderDetails;
 
 @Dao
 public interface OrderDao {
