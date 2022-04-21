@@ -13,14 +13,20 @@ import lt.vcs.finalproject.repository.MainDatabase;
 
 public class CustomerActivity extends AppCompatActivity {
 
+    EditText editTextCustomerFirstName;
+    EditText editTextCustomerLastName;
+    EditText editTextCustomerPhoneNumber;
     Button backButtonCustomer;
+    Button nextButtonCustomer;
+
     Intent intent;
     CustomerDao customerDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer);
+
+        setUpUi();
 
         MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
         customerDao = mainDatabase.customerDao();
@@ -31,19 +37,25 @@ public class CustomerActivity extends AppCompatActivity {
         intent = getIntent();
     }
 
-    private void setUpBackButtonClickCustomer() {
+    private void setUpUi() {
+
+        setContentView(R.layout.activity_customer);
+        editTextCustomerFirstName = findViewById(R.id.customerFirstName);
+        editTextCustomerLastName = findViewById(R.id.customerLastName);
+        editTextCustomerPhoneNumber = findViewById(R.id.customerPhoneNumber);
         backButtonCustomer = findViewById(R.id.customerBackButton);
+        nextButtonCustomer = findViewById(R.id.customerNextButton);
+
+    }
+
+    private void setUpBackButtonClickCustomer() {
         backButtonCustomer.setOnClickListener(view -> finish());
     }
 
     private void setUpNextButtonClickCustomer() {
-        backButtonCustomer = findViewById(R.id.customerNextButton);
 
-        final EditText editTextCustomerFirstName = findViewById(R.id.customerFirstName);
-        final EditText editTextCustomerLastName = findViewById(R.id.customerLastName);
-        final EditText editTextCustomerPhoneNumber = findViewById(R.id.customerPhoneNumber);
+        nextButtonCustomer.setOnClickListener(view -> {
 
-        backButtonCustomer.setOnClickListener(view -> {
             String customerFirstName = editTextCustomerFirstName.getText().toString();
             String customerLastName = editTextCustomerLastName.getText().toString();
             String customerPhoneNumber = editTextCustomerPhoneNumber.getText().toString();
@@ -55,6 +67,7 @@ public class CustomerActivity extends AppCompatActivity {
             intent = new Intent(CustomerActivity.this, FormulaActivity.class);
 
             startActivity(intent);
+
         });
     }
 }

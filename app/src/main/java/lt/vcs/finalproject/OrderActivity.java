@@ -26,29 +26,24 @@ import lt.vcs.finalproject.repository.OrderDetailsDao;
 
 public class OrderActivity extends AppCompatActivity {
 
-    private Button closeButton;
-    private Intent intent;
-    private OrderDetails orderDetails;
+    TextView firstAndLastNameTextView;
+    TextView oxidantsAndColorsTextView;
+    TextView timeAndPriceTextView;
+    Button closeButton;
 
-    private OrderDetailsDao orderDetailsDao;
+    AlertDialog.Builder builder;
 
-    private TextView firstAndLastNameTextView;
-    private TextView oxidantsAndColorsTextView;
-    private TextView timeAndPriceTextView;
-    private AlertDialog.Builder builder;
+    Intent intent;
+    OrderDetails orderDetails;
+    OrderDetailsDao orderDetailsDao;
 
     int customerId;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setupUI();
-
-        oxidantsAndColorsTextViewClick();
-
-        setUpCloseButton();
 
         intent = getIntent();
 
@@ -59,19 +54,11 @@ public class OrderActivity extends AppCompatActivity {
 
         orderDetails = orderDetailsDao.getItem(customerId);
 
-        firstAndLastNameTextView.setText(
-                "Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
+        setupView();
 
-        oxidantsAndColorsTextView.setText(
-                "Oxidants: \n" +
-                        getPlainTextFromList(orderDetails.getOxidants()) +
-                        "\nColors:\n" +
-                        getPlainTextFromList(orderDetails.getColors()));
-        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min. \nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
+        oxidantsAndColorsTextViewClick();
 
-//        firstAndLastNameTextView.setText("Customer: " + orderDetails.getCustomerFirstName() + " " + orderDetails.getCustomerLastName() + " " + orderDetails.getCustomerPhoneNumber());
-//        oxidantsAndColorsTextView.setText("Oxidants: " + orderDetails.getOxidants() + "\nColors: " + orderDetails.getColors());
-//        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min.\nPrice: " + orderDetails.getFormulaPrice() + " Eur.");
+        setUpCloseButton();
 
     }
 
@@ -81,6 +68,22 @@ public class OrderActivity extends AppCompatActivity {
         oxidantsAndColorsTextView = findViewById(R.id.oxidantsAndColorsTextView);
         timeAndPriceTextView = findViewById(R.id.timeAndPriceTextView);
     }
+
+    private void setupView() {
+        firstAndLastNameTextView.setText(
+                "Customer: " + orderDetails.getCustomerFirstName() + " "
+                        + orderDetails.getCustomerLastName() + " "
+                        + orderDetails.getCustomerPhoneNumber());
+
+        oxidantsAndColorsTextView.setText(
+                "Oxidants: \n" +
+                        getPlainTextFromList(orderDetails.getOxidants()) +
+                        "\nColors:\n" +
+                        getPlainTextFromList(orderDetails.getColors()));
+        timeAndPriceTextView.setText("Time: " + orderDetails.getFormulaTime() + " min. \nPrice: "
+                + orderDetails.getFormulaPrice() + " Eur.");
+    }
+
 
     private void oxidantsAndColorsTextViewClick() {
         oxidantsAndColorsTextView.setOnClickListener(new View.OnClickListener() {

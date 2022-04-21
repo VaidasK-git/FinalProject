@@ -24,7 +24,28 @@ import lt.vcs.finalproject.repository.Oxidant;
 
 public class FormulaActivity extends AppCompatActivity {
 
+    Spinner spinnerOxidantManufacturerOne;
+    Spinner spinnerOxidantProductOne;
+    EditText editTextOxidantWeightOne;
+    Spinner spinnerOxidantManufacturerTwo;
+    Spinner spinnerOxidantProductTwo;
+    EditText editTextOxidantWeightTwo;
+    Spinner spinnerColorManufacturerOne;
+    Spinner spinnerColorProductOne;
+    EditText editTextColorWeightOne;
+    Spinner spinnerColorManufacturerTwo;
+    Spinner spinnerColorProductTwo;
+    EditText editTextColorWeightTwo;
+    Spinner spinnerColorManufacturerThree;
+    Spinner spinnerColorProductThree;
+    EditText editTextColorWeightThree;
+    Spinner spinnerColorManufacturerFour;
+    Spinner spinnerColorProductFour;
+    EditText editTextColorWeightFour;
+    EditText editTextFormulaTime;
+    EditText editTextFormulaPrice;
     Button saveButtonFormula;
+
     Intent intent;
     CustomerDao customerDao;
     FormulaDao formulaDao;
@@ -33,7 +54,8 @@ public class FormulaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formula);
+
+        setUpUi();
 
         MainDatabase mainDatabase = MainDatabase.getInstance(getApplicationContext());
         customerDao = mainDatabase.customerDao();
@@ -44,9 +66,37 @@ public class FormulaActivity extends AppCompatActivity {
 
         setUpSaveButtonClickFormula();
 
+        onBackPressed();
+
         intent = getIntent();
 
-        onBackPressed();
+    }
+
+    private void setUpUi(){
+
+        setContentView(R.layout.activity_formula);
+        spinnerOxidantManufacturerOne = findViewById(R.id.spinnerOxidantManufacturerOne);
+        spinnerOxidantProductOne = findViewById(R.id.spinnerOxidantProductOne);
+        editTextOxidantWeightOne = findViewById(R.id.oxidantWeightOne);
+        spinnerOxidantManufacturerTwo = findViewById(R.id.spinnerOxidantManufacturerTwo);
+        spinnerOxidantProductTwo = findViewById(R.id.spinnerOxidantProductTwo);
+        editTextOxidantWeightTwo = findViewById(R.id.oxidantWeightTwo);
+        spinnerColorManufacturerOne = findViewById(R.id.spinnerColorManufacturerOne);
+        spinnerColorProductOne = findViewById(R.id.spinnerColorProductOne);
+        editTextColorWeightOne = findViewById(R.id.colorWeightOne);
+        spinnerColorManufacturerTwo = findViewById(R.id.spinnerColorManufacturerTwo);
+        spinnerColorProductTwo = findViewById(R.id.spinnerColorProductTwo);
+        editTextColorWeightTwo = findViewById(R.id.colorWeightTwo);
+        spinnerColorManufacturerThree = findViewById(R.id.spinnerColorManufacturerThree);
+        spinnerColorProductThree = findViewById(R.id.spinnerColorProductThree);
+        editTextColorWeightThree = findViewById(R.id.colorWeightThree);
+        spinnerColorManufacturerFour = findViewById(R.id.spinnerColorManufacturerFour);
+        spinnerColorProductFour = findViewById(R.id.spinnerColorProductFour);
+        editTextColorWeightFour = findViewById(R.id.colorWeightFour);
+        editTextFormulaTime = findViewById(R.id.formulaTime);
+        editTextFormulaPrice = findViewById(R.id.formulaPrice);
+        saveButtonFormula = findViewById(R.id.formulaSaveButton);
+
     }
 
     private void setUpSpinners() {
@@ -134,34 +184,6 @@ public class FormulaActivity extends AppCompatActivity {
     }
 
     private void setUpSaveButtonClickFormula() {
-        saveButtonFormula = findViewById(R.id.formulaSaveButton);
-
-        final Spinner spinnerOxidantManufacturerOne = findViewById(R.id.spinnerOxidantManufacturerOne);
-        final Spinner spinnerOxidantProductOne = findViewById(R.id.spinnerOxidantProductOne);
-        final EditText editTextOxidantWeightOne = findViewById(R.id.oxidantWeightOne);
-
-        final Spinner spinnerOxidantManufacturerTwo = findViewById(R.id.spinnerOxidantManufacturerTwo);
-        final Spinner spinnerOxidantProductTwo = findViewById(R.id.spinnerOxidantProductTwo);
-        final EditText editTextOxidantWeightTwo = findViewById(R.id.oxidantWeightTwo);
-
-        final Spinner spinnerColorManufacturerOne = findViewById(R.id.spinnerColorManufacturerOne);
-        final Spinner spinnerColorProductOne = findViewById(R.id.spinnerColorProductOne);
-        final EditText editTextColorWeightOne = findViewById(R.id.colorWeightOne);
-
-        final Spinner spinnerColorManufacturerTwo = findViewById(R.id.spinnerColorManufacturerTwo);
-        final Spinner spinnerColorProductTwo = findViewById(R.id.spinnerColorProductTwo);
-        final EditText editTextColorWeightTwo = findViewById(R.id.colorWeightTwo);
-
-        final Spinner spinnerColorManufacturerThree = findViewById(R.id.spinnerColorManufacturerThree);
-        final Spinner spinnerColorProductThree = findViewById(R.id.spinnerColorProductThree);
-        final EditText editTextColorWeightThree = findViewById(R.id.colorWeightThree);
-
-        final Spinner spinnerColorManufacturerFour = findViewById(R.id.spinnerColorManufacturerFour);
-        final Spinner spinnerColorProductFour = findViewById(R.id.spinnerColorProductFour);
-        final EditText editTextColorWeightFour = findViewById(R.id.colorWeightFour);
-
-        final EditText editTextFormulaTime = findViewById(R.id.formulaTime);
-        final EditText editTextFormulaPrice = findViewById(R.id.formulaPrice);
 
         saveButtonFormula.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +264,9 @@ public class FormulaActivity extends AppCompatActivity {
                 } else {
                     formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
                 }
+
                 Formula formula = new Formula(formulaTime, formulaPrice);
+
                 if (!oxidantManufacturerOne.equals("")) {
                     formula.add(oxidantOne);
                 }
@@ -269,8 +293,6 @@ public class FormulaActivity extends AppCompatActivity {
                 Order order = new Order(customerId, formulaId);
 
                 orderDao.insertOrder(order);
-
-                //orderDao.deleteItem(3);
 
                 intent = new Intent(FormulaActivity.this, MainActivity.class);
                 startActivity(intent);
