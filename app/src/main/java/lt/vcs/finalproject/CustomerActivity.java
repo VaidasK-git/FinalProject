@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -62,12 +63,33 @@ public class CustomerActivity extends AppCompatActivity {
 
             Customer customer = new Customer(customerFirstName, customerLastName, customerPhoneNumber);
 
-            customerDao.insertCustomer(customer);
+            if (!customerFirstName.isEmpty()) {
 
-            intent = new Intent(CustomerActivity.this, FormulaActivity.class);
+                if(!customerLastName.isEmpty()) {
 
-            startActivity(intent);
+                    if (!customerPhoneNumber.isEmpty()) {
+
+                        customerDao.insertCustomer(customer);
+
+                        intent = new Intent(CustomerActivity.this, FormulaActivity.class);
+
+                        startActivity(intent);
+
+                    } else {
+                        editTextCustomerPhoneNumber.setError("First name is required!");
+                    }
+
+                } else {
+                    editTextCustomerLastName.setError("Last mane is required!");
+                }
+
+            } else {
+                editTextCustomerFirstName.setError("Phone number is required!");
+            }
 
         });
+
     }
+
 }
+

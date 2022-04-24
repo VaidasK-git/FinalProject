@@ -1,8 +1,6 @@
 package lt.vcs.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +49,11 @@ public class FormulaActivity extends AppCompatActivity {
     FormulaDao formulaDao;
     OrderDao orderDao;
 
+    Formula formula;
+    Oxidant oxidant;
+    Color color;
+    Order order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +75,7 @@ public class FormulaActivity extends AppCompatActivity {
 
     }
 
-    private void setUpUi(){
+    private void setUpUi() {
 
         setContentView(R.layout.activity_formula);
         spinnerOxidantManufacturerOne = findViewById(R.id.spinnerOxidantManufacturerOne);
@@ -117,60 +120,60 @@ public class FormulaActivity extends AppCompatActivity {
                 String selectedClass = parent.getItemAtPosition(position).toString();
                 switch (selectedClass) {
                     case "":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_empty_products_array)));
                         break;
 
                     case "INOA":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_products_array)));
                         break;
 
                     case "INOA Bronzing":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_bronzing_products_array)));
                         break;
 
                     case "INOA Carmilane":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_carmilane_products_array)));
                         break;
 
                     case "INOA Fundamental":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_fundamentals_products_array)));
                         break;
 
                     case "INOA Glow":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_glow_products_array)));
                         break;
 
                     case "INOA High Resist":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_hresist_products_array)));
                         break;
 
                     case "INOA Marron Resist":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_mresist_products_array)));
                         break;
 
                     case "INOA Rubilane":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_rubilane_products_array)));
                         break;
                     case "INOA Supreme":
-                        productSpinner.setAdapter(new ArrayAdapter<String>(FormulaActivity.this,
+                        productSpinner.setAdapter(new ArrayAdapter<>(FormulaActivity.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 getResources().getStringArray(R.array.color_inoa_supreme_products_array)));
                         break;
@@ -185,119 +188,126 @@ public class FormulaActivity extends AppCompatActivity {
 
     private void setUpSaveButtonClickFormula() {
 
-        saveButtonFormula.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String oxidantManufacturerOne = spinnerOxidantManufacturerOne.getSelectedItem().toString();
-                String oxidantProductOne = spinnerOxidantProductOne.getSelectedItem().toString();
-                int oxidantWeightOne;
-                if (editTextOxidantWeightOne.getText().toString().equals("")) {
-                    oxidantWeightOne = 0;
+        saveButtonFormula.setOnClickListener(view -> {
+            createFormula();
+
+            addOxidantToFormula(spinnerOxidantManufacturerOne, spinnerOxidantProductOne, editTextOxidantWeightOne);
+            addOxidantToFormula(spinnerOxidantManufacturerTwo, spinnerOxidantProductTwo, editTextOxidantWeightTwo);
+
+            addColorToFormula(spinnerColorManufacturerOne, spinnerColorProductOne, editTextColorWeightOne);
+            addColorToFormula(spinnerColorManufacturerTwo, spinnerColorProductTwo, editTextColorWeightTwo);
+            addColorToFormula(spinnerColorManufacturerThree, spinnerColorProductThree, editTextColorWeightThree);
+            addColorToFormula(spinnerColorManufacturerFour, spinnerColorProductFour, editTextColorWeightFour);
+
+            if (spinnerOxidantManufacturerOne.getSelectedItem().toString().isEmpty()
+                    || (!spinnerOxidantManufacturerOne.getSelectedItem().toString().isEmpty() && !editTextOxidantWeightOne.getText().toString().isEmpty())) {
+                if (spinnerOxidantManufacturerTwo.getSelectedItem().toString().isEmpty()
+                        || (!spinnerOxidantManufacturerTwo.getSelectedItem().toString().isEmpty() && !editTextOxidantWeightTwo.getText().toString().isEmpty())) {
+                    if (spinnerColorManufacturerOne.getSelectedItem().toString().isEmpty()
+                            || (!spinnerColorManufacturerOne.getSelectedItem().toString().isEmpty() && !editTextColorWeightOne.getText().toString().isEmpty())) {
+                        if (spinnerColorManufacturerTwo.getSelectedItem().toString().isEmpty()
+                                || (!spinnerColorManufacturerTwo.getSelectedItem().toString().isEmpty() && !editTextColorWeightTwo.getText().toString().isEmpty())) {
+                            if (spinnerColorManufacturerThree.getSelectedItem().toString().isEmpty()
+                                    || (!spinnerColorManufacturerThree.getSelectedItem().toString().isEmpty() && !editTextColorWeightThree.getText().toString().isEmpty())) {
+                                if(spinnerColorManufacturerFour.getSelectedItem().toString().isEmpty()
+                                        || (!spinnerColorManufacturerFour.getSelectedItem().toString().isEmpty() && !editTextColorWeightFour.getText().toString().isEmpty())){
+                                    if (!editTextFormulaTime.getText().toString().isEmpty()) {
+                                        if (!editTextFormulaPrice.getText().toString().isEmpty()) {
+
+                                            formulaDao.insertFormula(formula);
+
+                                            int customerId = customerDao.getMaxCustomerId();
+                                            int formulaId = formulaDao.getMaxFormulaId();
+                                            order = new Order(customerId, formulaId);
+
+                                            orderDao.insertOrder(order);
+
+                                            intent = new Intent(FormulaActivity.this, MainActivity.class);
+                                            startActivity(intent);
+
+                                        } else {
+                                            editTextFormulaPrice.setError("Field is required");
+                                        }
+
+                                    }else {
+                                        editTextFormulaTime.setError("Field is required");
+                                    }
+
+                                }else {
+                                    editTextColorWeightFour.setError("Field is required");
+                                }
+
+                            } else {
+                                editTextColorWeightThree.setError("Field is required");
+                            }
+
+                        } else {
+                            editTextColorWeightTwo.setError("Field is required");
+                        }
+
+                    } else {
+                        editTextColorWeightOne.setError("Field is required");
+                    }
+
                 } else {
-                    oxidantWeightOne = Integer.parseInt(editTextOxidantWeightOne.getText().toString());
-                }
-                Oxidant oxidantOne = new Oxidant(oxidantManufacturerOne, oxidantProductOne, oxidantWeightOne);
-
-                String oxidantManufacturerTwo = spinnerOxidantManufacturerTwo.getSelectedItem().toString();
-                String oxidantProductTwo = spinnerOxidantProductTwo.getSelectedItem().toString();
-                int oxidantWeightTwo;
-                if (editTextOxidantWeightTwo.getText().toString().equals("")) {
-                    oxidantWeightTwo = 0;
-                } else {
-                    oxidantWeightTwo = Integer.parseInt(editTextOxidantWeightTwo.getText().toString());
-                }
-                Oxidant oxidantTwo = new Oxidant(oxidantManufacturerTwo, oxidantProductTwo, oxidantWeightTwo);
-
-                String colorManufacturerOne = spinnerColorManufacturerOne.getSelectedItem().toString();
-                String colorProductOne = spinnerColorProductOne.getSelectedItem().toString();
-                int colorWeightOne;
-                if (editTextColorWeightOne.getText().toString().equals("")) {
-                    colorWeightOne = 0;
-                } else {
-                    colorWeightOne = Integer.parseInt(editTextColorWeightOne.getText().toString());
-                }
-                Color colorOne = new Color(colorManufacturerOne, colorProductOne, colorWeightOne);
-
-                String colorManufacturerTwo = spinnerColorManufacturerTwo.getSelectedItem().toString();
-                ;
-                String colorProductTwo = spinnerColorProductTwo.getSelectedItem().toString();
-                int colorWeightTwo;
-                if (editTextColorWeightTwo.getText().toString().equals("")) {
-                    colorWeightTwo = 0;
-                } else {
-                    colorWeightTwo = Integer.parseInt(editTextColorWeightTwo.getText().toString());
-                }
-                Color colorTwo = new Color(colorManufacturerTwo, colorProductTwo, colorWeightTwo);
-
-                String colorManufacturerThree = spinnerColorManufacturerThree.getSelectedItem().toString();
-                ;
-                String colorProductThree = spinnerColorProductThree.getSelectedItem().toString();
-                int colorWeightThree;
-                if (editTextColorWeightThree.getText().toString().equals("")) {
-                    colorWeightThree = 0;
-                } else {
-                    colorWeightThree = Integer.parseInt(editTextColorWeightThree.getText().toString());
-                }
-                Color colorThree = new Color(colorManufacturerThree, colorProductThree, colorWeightThree);
-
-                String colorManufacturerFour = spinnerColorManufacturerFour.getSelectedItem().toString();
-                ;
-                String colorProductFour = spinnerColorProductFour.getSelectedItem().toString();
-                int colorWeightFour;
-                if (editTextColorWeightFour.getText().toString().equals("")) {
-                    colorWeightFour = 0;
-                } else {
-                    colorWeightFour = Integer.parseInt(editTextColorWeightFour.getText().toString());
-                }
-                Color colorFour = new Color(colorManufacturerFour, colorProductFour, colorWeightFour);
-
-                int formulaTime;
-                if (editTextFormulaTime.getText().toString().equals("")) {
-                    formulaTime = 0;
-                } else {
-                    formulaTime = Integer.parseInt(editTextFormulaTime.getText().toString());
+                    editTextOxidantWeightTwo.setError("Field is required");
                 }
 
-                int formulaPrice;
-                if (editTextFormulaPrice.getText().toString().equals("")) {
-                    formulaPrice = 0;
-                } else {
-                    formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
-                }
-
-                Formula formula = new Formula(formulaTime, formulaPrice);
-
-                if (!oxidantManufacturerOne.equals("")) {
-                    formula.add(oxidantOne);
-                }
-                if (!oxidantManufacturerTwo.equals("")) {
-                    formula.add(oxidantTwo);
-                }
-                if (!colorManufacturerOne.equals("")) {
-                    formula.add(colorOne);
-                }
-                if (!colorManufacturerTwo.equals("")) {
-                    formula.add(colorTwo);
-                }
-                if (!colorManufacturerThree.equals("")) {
-                    formula.add(colorThree);
-                }
-                if (!colorManufacturerFour.equals("")) {
-                    formula.add(colorFour);
-                }
-
-                formulaDao.insertFormula(formula);
-
-                int customerId = customerDao.getMaxCustomerId();
-                int formulaId = formulaDao.getMaxFormulaId();
-                Order order = new Order(customerId, formulaId);
-
-                orderDao.insertOrder(order);
-
-                intent = new Intent(FormulaActivity.this, MainActivity.class);
-                startActivity(intent);
+            } else {
+                editTextOxidantWeightOne.setError("Field is required");
             }
+
         });
+    }
+
+    private void createFormula() {
+        int formulaTime;
+        if (editTextFormulaTime.getText().toString().isEmpty()) {
+            formulaTime = 0;
+        } else {
+            formulaTime = Integer.parseInt(editTextFormulaTime.getText().toString());
+        }
+
+        int formulaPrice;
+        if (editTextFormulaPrice.getText().toString().isEmpty()) {
+            formulaPrice = 0;
+        } else {
+            formulaPrice = Integer.parseInt(editTextFormulaPrice.getText().toString());
+        }
+
+        formula = new Formula(formulaTime, formulaPrice);
+    }
+
+    public void addOxidantToFormula(Spinner manufacturer, Spinner product, EditText weight) {
+        String manufacturerString = manufacturer.getSelectedItem().toString();
+        String oxidantString = product.getSelectedItem().toString();
+        int weightInt;
+        if (weight.getText().toString().isEmpty()) {
+            weightInt = 0;
+        } else {
+            weightInt = Integer.parseInt(weight.getText().toString());
+        }
+
+        oxidant = new Oxidant(manufacturerString, oxidantString, weightInt);
+        if (!manufacturerString.isEmpty()) {
+            formula.add(oxidant);
+        }
+    }
+
+    public void addColorToFormula(Spinner manufacturer, Spinner product, EditText weight) {
+        String manufacturerString = manufacturer.getSelectedItem().toString();
+        String oxidantString = product.getSelectedItem().toString();
+        int weightInt;
+        if (weight.getText().toString().isEmpty()) {
+            weightInt = 0;
+        } else {
+            weightInt = Integer.parseInt(weight.getText().toString());
+        }
+
+        color = new Color(manufacturerString, oxidantString, weightInt);
+        if (!manufacturerString.isEmpty()) {
+            formula.add(color);
+        }
     }
 
     @Override
