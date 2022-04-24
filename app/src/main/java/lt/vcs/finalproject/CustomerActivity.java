@@ -76,7 +76,7 @@ public class CustomerActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     } else {
-                        editTextCustomerPhoneNumber.setError("First name is required!");
+                        editTextCustomerPhoneNumber.setError("Phone number is required!");
                     }
 
                 } else {
@@ -84,7 +84,7 @@ public class CustomerActivity extends AppCompatActivity {
                 }
 
             } else {
-                editTextCustomerFirstName.setError("Phone number is required!");
+                editTextCustomerFirstName.setError("First name is required!");
             }
 
         });
