@@ -65,8 +65,8 @@ public class OrderActivity extends AppCompatActivity {
     private void setupView() {
         firstAndLastNameTextView.setText(
                 "Customer: " + orderDetails.getCustomerFirstName() + " "
-                        + orderDetails.getCustomerLastName() + " "
-                        + orderDetails.getCustomerPhoneNumber());
+                        + orderDetails.getCustomerLastName()
+                        + "\nPhone: " + orderDetails.getCustomerPhoneNumber());
 
         oxidantsAndColorsTextView.setText(
                 "Oxidants: \n" +

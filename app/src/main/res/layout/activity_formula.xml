@@ -65,11 +65,13 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerOxidantProductOne"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:paddingStart="8dp"
+                android:layout_marginEnd="24dp"
                 android:entries="@array/oxidants_products_array"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/oxidantWeightOne"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerOne"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -116,11 +118,13 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerOxidantProductTwo"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:paddingStart="8dp"
+                android:layout_marginEnd="24dp"
                 android:entries="@array/oxidants_products_array"
+                android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/oxidantWeightTwo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerOxidantManufacturerTwo"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -178,10 +182,12 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerColorProductOne"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/colorWeightOne"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerOne"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -228,10 +234,12 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerColorProductTwo"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/colorWeightTwo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerTwo"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -277,10 +285,12 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerColorProductThree"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/colorWeightThree"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerThree"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
@@ -325,10 +335,12 @@
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinnerColorProductFour"
-                android:layout_width="180dp"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
                 android:paddingStart="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/colorWeightFour"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerColorManufacturerFour"
                 tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
